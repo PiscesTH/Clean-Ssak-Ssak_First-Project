@@ -6,6 +6,10 @@ import com.clean.cleanssakssak.todo.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class TodoService {
@@ -35,5 +39,24 @@ public class TodoService {
         }
 
         return new ResVo(Const.FAIL);//select 실패 시
+    }
+
+    //청소 todo 하나 등록
+    public ResVo postTodo(TodoInsDto dto){
+        String[] tmp = dto.getDoDay().split("/");
+        List<String> list = new ArrayList<>(Arrays.asList(tmp));
+        list.add(0, list.get(list.size() - 1));
+        list.remove(list.size() - 1);
+        String date = String.join("-", list);
+        dto.setDoDay(date);
+        int insResult = mapper.insTodo(dto);
+        return new ResVo(dto.getTodoId());
+    }
+
+    //등록한 todo 전체 조회(한 페이지에 8개씩 페이징 처리)
+    public List<TodoSelAllVo> getTodoAll(TodoSelAllDto dto) {
+        dto.setRowCount(Const.TODO_ROW_COUNT);
+        dto.setStartIdx((dto.getPage()-1) * Const.TODO_ROW_COUNT);
+        return mapper.selTodoAll(dto);
     }
 }
