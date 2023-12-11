@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clean.clean.user.UserMapper">
+    <select id="selIdComparison">
+        SELECT COUNT(uid)
+        FROM t_user
+        WHERE uid = #{uid}
+    </select>
+
+    <insert id="insUserSignup" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO t_user
+        SET uid = #{uid},
+        upw = #{upw},
+        nickname = #{nickname}
+    </insert>
+    
+    <select id="selSigninPw">
+        select upw
+        from t_user
+        where uid = #{uid}
+    </select>
+    <select id="selSignin">
+        select user_id AS userID, nickname
+        from t_user
+        where uid = #{uid}
+    </select>
+</mapper>

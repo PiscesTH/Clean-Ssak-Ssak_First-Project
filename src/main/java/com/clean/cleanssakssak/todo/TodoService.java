@@ -2,31 +2,36 @@ package com.clean.cleanssakssak.todo;
 
 import com.clean.cleanssakssak.common.Const;
 import com.clean.cleanssakssak.common.ResVo;
-import com.clean.cleanssakssak.todo.model.TodoInsDto;
-import com.clean.cleanssakssak.todo.model.TodoSelAllDto;
-import com.clean.cleanssakssak.todo.model.TodoSelAllVo;
+import com.clean.cleanssakssak.todo.model.*;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class TodoService {
     private final TodoMapper mapper;
 
-    //청소 todo 하나 등록
-    public ResVo postTodo(TodoInsDto dto){
-        int insResult = mapper.insTodo(dto);
-        return new ResVo(dto.getTodoId());
+    public ResVo patchTodo(TodoUpDto dto){// todo 내용 수정
+        int result = mapper.upTodo(dto);
+        return new ResVo(result);
     }
 
-    //등록한 todo 전체 조회(한 페이지에 8개씩 페이징 처리)
-    public List<TodoSelAllVo> getTodoAll(TodoSelAllDto dto) {
-        dto.setRowCount(Const.TODO_ROW_COUNT);
-        dto.setStartIdx((dto.getPage()-1) * Const.TODO_ROW_COUNT);
-        return mapper.selTodoAll(dto);
+    public ResVo delTodo(TodoDelDto dto){// todo 삭제
+        int result = mapper.delTodo(dto);
+        return new ResVo(result);
+    }
+
+    public ResVo toggleCheck(TodoToggleCheckDto dto){// todo check 처리
+        int result = mapper.selCheck(dto);
+
+        if(result == 1){// 이미 check가 되어있는경우
+            mapper.upCheck(Const.CHECK_OFF);//체크 취소 update
+            return new ResVo(Const.CANCEL);
+        }else if (result == 0){// check가 없는 경우
+            mapper.upCheck(Const.CHECK_ON);// 체크 update
+            return new ResVo(Const.SUCCESS);
+        }
+
+        return new ResVo(Const.FAIL);//select 실패 시
     }
 }
