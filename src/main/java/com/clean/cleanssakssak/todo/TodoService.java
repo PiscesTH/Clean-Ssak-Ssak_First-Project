@@ -25,10 +25,12 @@ public class TodoService {
         int result = mapper.selCheck(dto);
 
         if(result == 1){// 이미 check가 되어있는경우
-            mapper.upCheck(Const.CHECK_OFF);//체크 취소 update
+            dto.setCheck(Const.CHECK_OFF);
+            mapper.upCheck(dto);//체크 취소 update
             return new ResVo(Const.CANCEL);
         }else if (result == 0){// check가 없는 경우
-            mapper.upCheck(Const.CHECK_ON);// 체크 update
+            dto.setCheck(Const.CHECK_ON);// 체크 update
+            mapper.upCheck(dto);
             return new ResVo(Const.SUCCESS);
         }
 

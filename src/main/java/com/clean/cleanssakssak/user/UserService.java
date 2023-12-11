@@ -46,7 +46,7 @@ public class UserService {
         if(password == null){//SELECT 하지 못한 것 = 해당 uid가 없다
             vo.setResult(Const.ID_FAIL);
             return vo;
-        }else if(BCrypt.checkpw(password, dto.getUpw())){
+        }else if(BCrypt.checkpw(dto.getUpw(), password)){
             //upw를 SELECT 했다면 암호화 된 password가 고객이 입력한 dto.getUpw와 같은지 체크
             vo = mapper.selSignin(dto);//true라면 로그인 성공 해당 유저의 정보를 SELECT
             vo.setResult(Const.SUCCESS);

@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 public class TodoDelDto {//todo 삭제 시 필요한 데이터
-    @Schema(name = "해당 todo PK")
+    @Schema(title = "해당 todo PK")
     private int todoId;
-    @Schema(name = "todo 삭제하고 싶은 유저의 PK")
+    @Schema(title = "todo 삭제하고 싶은 유저의 PK")
     private int userId;
 }

@@ -13,5 +13,5 @@ public interface TodoMapper {
 
     int selCheck(TodoToggleCheckDto dto);//todo check 유/무 확인
 
-    int upCheck(int check);//todo check toggle 처리
+    int upCheck(TodoToggleCheckDto dto);//todo check toggle 처리
 }

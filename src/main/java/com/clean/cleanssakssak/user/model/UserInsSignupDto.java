@@ -8,10 +8,10 @@ import lombok.Data;
 public class UserInsSignupDto {// 회원가입 시 필요한 고객 요청 데이터
     @JsonIgnore
     private int userId;// 회원가입 성공 시 응답할 user_id 값
-    @Schema(name = "ID")
+    @Schema(title = "ID")
     private String uid;// ID
-    @Schema(name = "PW")
+    @Schema(title = "PW")
     private String upw;// 비밀번호
-    @Schema(name = "별명 / 성함")
+    @Schema(title = "별명 / 성함")
     private String nickname;// 별명 / 성함
 }

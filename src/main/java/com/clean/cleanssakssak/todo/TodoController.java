@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("api/todo")
-public class TocoController {
+public class TodoController {
     private final TodoService service;
 
     @Operation(summary = "todo 일정 수정" ,description = "일정 내용 수정\n0: 수정 실패, 1: 수정 성공")
