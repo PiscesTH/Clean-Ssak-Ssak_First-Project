@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.clean.cleanssakssak.todo.TodoMapper">
+<mapper namespace="com.clean.cleanssakssak.diary.DiaryMapper">
 
     <insert id="DiaryIns" keyProperty="diary_id" useGeneratedKeys="true"> <!-- 다이어리 작성 -->
         INSERT INTO t_diary
