@@ -16,6 +16,13 @@ public class TodoService {
     private final TodoMapper mapper;
 
     public ResVo patchTodo(TodoUpDto dto){// todo 내용 수정
+
+        String cleaning = dto.getCleaning();
+        if(cleaning == null || cleaning.isBlank()) {
+            return new ResVo(Const.FAIL);
+        }
+
+
         String[] dayArr= dto.getDoDay().split("/");
         List<String> dayList = new ArrayList<>(Arrays.asList(dayArr));
 
