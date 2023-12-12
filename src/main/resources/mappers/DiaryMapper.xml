@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.clean.cleanssakssak.diary.DiaryMapper">
 
-    <insert id="DiaryIns" keyProperty="diary_id" useGeneratedKeys="true"> <!-- 다이어리 작성 -->
+    <insert id="insDiary" keyProperty="diary_id" useGeneratedKeys="true"> <!-- 다이어리 작성 -->
         INSERT INTO t_diary
         SET
         user_id =#{loginedUserId}
@@ -12,24 +12,23 @@
         ,contents =#{contents}
     </insert>
 
-    <insert id="DiaryInsPic"> <!-- 다이어리 사진 넣기-->
+    <insert id="insDiaryPic"> <!-- 다이어리 사진 넣기-->
         INSERT INTO t_diary_pic
         (diary_id,pic)
         values
         <foreach collection="pics" item="pic" open="(" close=") " separator="),(">
             #{diaryId},#{pic}
         </foreach>
-
     </insert>
 
-    <delete id="DiaryDel"> <!-- 다이어리 삭제 -->
+    <delete id="delDiary"> <!-- 다이어리 삭제 -->
         DELETE
         FROM t_diary
         WHERE diary_id = #{diaryId}
         AND user_id = #{loginedUserId}
     </delete>
 
-    <delete id="DiaryPicDel"> <!-- 다이어리 사진 삭제, 유저 확인 -->
+    <delete id="delDiaryPic"> <!-- 다이어리 사진 삭제, 유저 확인 -->
         DELETE B
         FROM t_diary A
         LEFT JOIN t_diary_pic B
@@ -37,8 +36,7 @@
         WHERE (A.diary_id, A.user_id) = (#{diaryId},#{loginedUserId});
     </delete>
 
-
-    <update id="DiaryUpt"> <!-- 다이어리 제목 내용 수정 -->
+    <update id="updDiary"> <!-- 다이어리 제목 내용 수정 -->
         UPDATE t_diary
         set
         title = #{title}
@@ -46,22 +44,19 @@
         WHERE user_id = #{loginedUserId} AND diary_id = #{diaryId}
     </update>
 
-
-    <select id="DiarySelAll"> <!-- 다이어리 페이징처리 -->
+    <select id="selDiaryAll"> <!-- 다이어리 페이징처리 -->
         SELECT C.nickname
         ,A.user_id as userId, A.title, A.contents
         ,A.created_at as createdAt,A.diary_id as diaryId
-
         FROM t_diary A
         LEFT JOIN t_user C
         ON A.user_id = C.user_id
         WHERE A.user_id = #{userId}
         ORDER BY A.diary_id DESC
         LIMIT #{startIdx},#{rowCount}
-
     </select>
 
-    <select id="DiaryPicAll">
+    <select id="selDiaryPicAll">
         SELECT pic
         FROM t_diary_pic
         WHERE diary_id = #{diaryId}
