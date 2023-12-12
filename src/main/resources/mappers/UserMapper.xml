@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.clean.clean.user.UserMapper">
+<mapper namespace="com.clean.cleanssakssak.user.UserMapper">
     <select id="selIdComparison">
         SELECT COUNT(uid)
         FROM t_user
