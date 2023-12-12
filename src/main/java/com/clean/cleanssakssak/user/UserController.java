@@ -36,7 +36,7 @@ public class UserController {
         return service.postSignup(dto);
     }
 
-    //----------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     @Operation(summary = "로그인 인증", description = "아이디/ 비밀번호를 활용한 인증처리\n" +
             "1: 성공, 2: 아이디 다름, 3: 비밀번호 다름")
     @Parameters(value = {
@@ -48,6 +48,7 @@ public class UserController {
         return service.postSignin(dto);
     }
 
+    //----------------------------------------------------------------------------------------------
     @Operation(summary = "유저의 비밀번호/닉네임 변경 처리", description = """
             result = 0 : 변경 실패<br>
             result > 0 : 변경 성공
@@ -57,6 +58,7 @@ public class UserController {
         return service.patchProfile(dto);
     }
 
+    //----------------------------------------------------------------------------------------------
     @Operation(summary = "회원 탈퇴 처리", description = """
             result = 1 : 회원 탈퇴 성공<br>
             result = 0 : 회원 탈퇴 실패
