@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class TodoSelAllVo {
+public class TodoSelAllVo {// todo 전체 조회 시 응답할 전체 리스트 데이터
     @Schema(description = "할 일 pk")
     private int todoId;
     @Schema(description = "청소 할 일")

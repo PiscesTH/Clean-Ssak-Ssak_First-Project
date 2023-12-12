@@ -15,13 +15,46 @@ import java.util.List;
 public class TodoService {
     private final TodoMapper mapper;
 
-    public ResVo patchTodo(TodoUpDto dto){// todo 내용 수정
+    //청소 todo 하나 등록
+    public ResVo postTodo(TodoInsDto dto){
 
-        String cleaning = dto.getCleaning();
-        if(cleaning == null || cleaning.isBlank()) {
+        if (dto.getCleaning() == null || dto.getCleaning().isBlank()){
+            return new ResVo(Const.FAIL);
+        }
+        if (dto.getDoDay() == null || dto.getDoDay().isBlank()){
             return new ResVo(Const.FAIL);
         }
 
+        String[] tmp = dto.getDoDay().split("/");
+        List<String> list = new ArrayList<>(Arrays.asList(tmp));
+        list.add(0, list.get(list.size() - 1));
+        list.remove(list.size() - 1);
+        String date = String.join("-", list);
+        dto.setDoDay(date);
+
+        int insResult = mapper.insTodo(dto);
+
+        return new ResVo(dto.getTodoId());
+
+    }
+
+    //등록한 todo 전체 조회(한 페이지에 8개씩 페이징 처리)
+    public List<TodoSelAllVo> getTodoAll(TodoSelAllDto dto) {
+
+        dto.setRowCount(Const.TODO_ROW_COUNT);
+        dto.setStartIdx((dto.getPage()-1) * Const.TODO_ROW_COUNT);
+
+        return mapper.selTodoAll(dto);
+
+    }
+
+    // todo 내용 수정
+    public ResVo patchTodo(TodoUpDto dto){
+
+        String cleaning = dto.getCleaning();
+        if(cleaning == null || cleaning.isBlank()) {//빈문자열 체크
+            return new ResVo(Const.FAIL);
+        }
 
         String[] dayArr= dto.getDoDay().split("/");
         List<String> dayList = new ArrayList<>(Arrays.asList(dayArr));
@@ -37,12 +70,16 @@ public class TodoService {
         return new ResVo(result);
     }
 
-    public ResVo delTodo(TodoDelDto dto){// todo 삭제
+    // todo 삭제
+    public ResVo delTodo(TodoDelDto dto){
+
         int result = mapper.delTodo(dto);
         return new ResVo(result);
+
     }
 
-    public ResVo toggleCheck(TodoToggleCheckDto dto){// todo check 처리
+    // todo check 처리
+    public ResVo toggleCheck(TodoToggleCheckDto dto){
         int result = mapper.selCheck(dto);
 
         if(result == 1){// 이미 check가 되어있는경우
@@ -56,30 +93,5 @@ public class TodoService {
         }
 
         return new ResVo(Const.FAIL);//select 실패 시
-    }
-
-    //청소 todo 하나 등록
-    public ResVo postTodo(TodoInsDto dto){
-        if (dto.getCleaning() == null || dto.getCleaning().isBlank()){
-            return new ResVo(Const.FAIL);
-        }
-        if (dto.getDoDay() == null || dto.getDoDay().isBlank()){
-            return new ResVo(Const.FAIL);
-        }
-        String[] tmp = dto.getDoDay().split("/");
-        List<String> list = new ArrayList<>(Arrays.asList(tmp));
-        list.add(0, list.get(list.size() - 1));
-        list.remove(list.size() - 1);
-        String date = String.join("-", list);
-        dto.setDoDay(date);
-        int insResult = mapper.insTodo(dto);
-        return new ResVo(dto.getTodoId());
-    }
-
-    //등록한 todo 전체 조회(한 페이지에 8개씩 페이징 처리)
-    public List<TodoSelAllVo> getTodoAll(TodoSelAllDto dto) {
-        dto.setRowCount(Const.TODO_ROW_COUNT);
-        dto.setStartIdx((dto.getPage()-1) * Const.TODO_ROW_COUNT);
-        return mapper.selTodoAll(dto);
     }
 }

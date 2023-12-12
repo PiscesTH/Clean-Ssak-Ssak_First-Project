@@ -9,6 +9,10 @@ import java.util.List;
 @Mapper
 public interface TodoMapper {
 
+    int insTodo(TodoInsDto dto);// todo 내용 작성
+
+    List<TodoSelAllVo> selTodoAll(TodoSelAllDto dto);// todo 리스트 전체 조회
+
     int upTodo(TodoUpDto dto);// todo 내용 수정
 
     int delTodo(TodoDelDto dto);// todo 삭제
@@ -16,7 +20,5 @@ public interface TodoMapper {
     int selCheck(TodoToggleCheckDto dto);//todo check 유/무 확인
 
     int upCheck(TodoToggleCheckDto dto);//todo check toggle 처리
-    int insTodo(TodoInsDto dto);
-    List<TodoSelAllVo> selTodoAll(TodoSelAllDto dto);
 
 }

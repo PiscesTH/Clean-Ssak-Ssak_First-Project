@@ -18,6 +18,20 @@ import java.util.List;
 public class TodoController {
     private final TodoService service;
 
+    @Operation(summary = "청소 할 일 등록", description = "등록 성공 : todo_id 값 리턴 / 등록 실패 : 0 ")
+    @PostMapping
+    public ResVo postTodo(@RequestBody TodoInsDto dto) {
+        return service.postTodo(dto);
+    }
+
+    //----------------------------------------------------------------------------------------------
+    @Operation(summary = "청소 할 일 목록 불러오기", description = "8개씩 페이징 처리")
+    @GetMapping
+    public List<TodoSelAllVo> getTodoAll(TodoSelAllDto dto) {
+        return service.getTodoAll(dto);
+    }
+
+    //----------------------------------------------------------------------------------------------
     @Operation(summary = "todo 일정 수정" ,description = "일정 내용 수정\n0: 수정 실패, 1: 수정 성공")
     @Parameters(value = {
             @Parameter(name = "userId", description = "todo를 수정하고 싶은 유저의 PK"),
@@ -30,6 +44,7 @@ public class TodoController {
         return service.patchTodo(dto);
     }
 
+    //----------------------------------------------------------------------------------------------
     @Operation(summary = "todo 일정 삭제", description = "일정을 삭제\n0: 수정 실패, 1: 수정 성공")
     @Parameters(value = {
             @Parameter(name = "userId", description = "todo를 삭제하고 싶은 유저의 PK"),
@@ -40,6 +55,7 @@ public class TodoController {
         return service.delTodo(dto);
     }
 
+    //----------------------------------------------------------------------------------------------
     @Operation(summary = "todo 체크 기능", description = "todo 체크 누르기/취소\n0: 수정 실패, 1: 수정 성공")
     @Parameters(value = {
             @Parameter(name = "userId", description = "todo를 삭제하고 싶은 유저의 PK"),
@@ -50,15 +66,7 @@ public class TodoController {
         return service.toggleCheck(dto);
     }
 
-    @Operation(summary = "청소 할 일 등록", description = "등록 성공 : todo_id 값 리턴 / 등록 실패 : 0 ")
-    @PostMapping
-    public ResVo postTodo(@RequestBody TodoInsDto dto) {
-        return service.postTodo(dto);
-    }
 
-    @Operation(summary = "청소 할 일 목록 불러오기", description = "8개씩 페이징 처리")
-    @GetMapping
-    public List<TodoSelAllVo> getTodoAll(TodoSelAllDto dto) {
-        return service.getTodoAll(dto);
-    }
+
+
 }
