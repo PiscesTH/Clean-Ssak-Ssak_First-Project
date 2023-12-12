@@ -21,18 +21,20 @@ public class UserService {
     public ResVo postSignup(UserInsSignupDto dto){// 회원가입 메소드
 
         dto.setUpw(BCrypt.hashpw(dto.getUpw(),BCrypt.gensalt()));// 비밀번호 암호화
-        int result = mapper.selIdComparison(dto.getUid());//ID 중복 체크
+        int idCheck = mapper.selIdComparison(dto.getUid());//ID 중복 체크
+        Integer nmCheck = mapper.selUserByNickname(dto.getNickname());
 
-        if(result == 1){//ID 중복으로 회원가입 실패 시 응답값
+        if(idCheck == 1){//ID 중복으로 회원가입 실패 시 응답값
             return new ResVo(Const.ID_DUPLICATED);
         }
 
-        result = mapper.insUserSignup(dto);
-        // ID가 중복되지 않으니 요청 값으로 INSERT(회원가입) 진행
-
-        if(result == 0){// NickName 중복으로 회원가입 실패 시 응답값
+        if(nmCheck != null){// NickName 중복으로 회원가입 실패 시 응답값
             return new ResVo(Const.FAIL);
         }
+
+        int result = mapper.insUserSignup(dto);
+        // ID가 중복되지 않으니 요청 값으로 INSERT(회원가입) 진행
+
         return new ResVo(dto.getUserId());
         //위의 IF문에 해당되지 않는다면 INSERT 성공으로 해당 user_id값 리턴
     }
