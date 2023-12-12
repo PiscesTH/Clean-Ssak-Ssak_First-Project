@@ -23,8 +23,7 @@
     </select>
 
     <update id="upCheck">
-        update
-        FROM t_todo
+        update t_todo
         SET is_checked = #{check}
     </update>
 
