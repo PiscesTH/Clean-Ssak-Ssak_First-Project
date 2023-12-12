@@ -11,5 +11,4 @@ public class UserSigninVo {
     private int userId;
     @Schema(title = "로그인 한 유저의 별명 / 성함")
     private String nickname;
-    private int test;
 }
