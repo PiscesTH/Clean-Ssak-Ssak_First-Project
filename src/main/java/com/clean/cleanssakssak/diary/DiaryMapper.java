@@ -23,7 +23,7 @@ public interface DiaryMapper {
     int DiaryPicDel(DiaryUptDto dto); // 다이어리 사진 수정
 
     List<DiarySelVo> DiarySelAll(DiarySelDto dto); // 페이징처리
-    List<String> testDiaryPicAll (int diaryId); //사진
+    List<String> DiaryPicAll (int diaryId); //사진
 
 }
 

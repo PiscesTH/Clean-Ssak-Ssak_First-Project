@@ -68,7 +68,7 @@ public class DiaryService {
     public List<DiarySelVo> DiaryGetVo(DiarySelDto dto) {
         List<DiarySelVo> list = mapper.DiarySelAll(dto);
         for (DiarySelVo vo : list) {
-            List<String> pics = mapper.testDiaryPicAll(vo.getDiaryId()); //diary id 이용해서
+            List<String> pics = mapper.DiaryPicAll(vo.getDiaryId()); //diary id 이용해서
             vo.setPics(pics); //사진정보 저장
         }
         return list;

@@ -47,7 +47,7 @@
     </update>
 
 
-    <select id="testDiarySelAll"> <!-- 다이어리 페이징처리 -->
+    <select id="DiarySelAll"> <!-- 다이어리 페이징처리 -->
         SELECT C.nickname
         ,A.user_id as userId, A.title, A.contents
         ,A.created_at as createdAt,A.diary_id as diaryId
@@ -61,7 +61,7 @@
 
     </select>
 
-    <select id="testDiaryPicAll">
+    <select id="DiaryPicAll">
         SELECT pic
         FROM t_diary_pic
         WHERE diary_id = #{diaryId}
