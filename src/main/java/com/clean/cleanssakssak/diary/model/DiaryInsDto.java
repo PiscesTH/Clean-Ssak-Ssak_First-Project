@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Builder
-@Schema(title = "다이어리 작성")
+@Schema(title = "다이어리 작성 시 필요한 데이터")
 public class DiaryInsDto {
     @JsonIgnore
     private int diary_id;

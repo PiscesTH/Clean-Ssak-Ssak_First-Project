@@ -5,8 +5,6 @@ import com.clean.cleanssakssak.diary.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +28,8 @@ public class DiaryController {
             ,@Parameter(name = "pic", description = "사진")
     })
     @PostMapping()
-    public ResVo PostDiary (@RequestBody DiaryInsDto dto) {
-        return service.DiaryIns(dto);
+    public ResVo postDiary (@RequestBody DiaryInsDto dto) {
+        return service.postDiary(dto);
     }
 
     //------------------------------- 다이어리 삭제 -------------------------------
@@ -41,8 +39,8 @@ public class DiaryController {
             ,@Parameter(name = "diary_id", description = "다이어리 번호")
     })
     @DeleteMapping
-    public ResVo DelDiary (@RequestBody DiaryDelDto dto) {
-        return service.DiaryDel(dto);
+    public ResVo delDiary (@RequestBody DiaryDelDto dto) {
+        return service.delDiary(dto);
     }
 
     //------------------------------- 다이어리 수정 -------------------------------
@@ -54,19 +52,19 @@ public class DiaryController {
             ,@Parameter(name = "diary_id", description = "다이어리 번호")
     })
     @PatchMapping
-    public ResVo PatchDiary (DiaryUptDto dto) {
-        return service.DiaryUpt(dto);
+    public ResVo patchDiary (DiaryUpdDto dto) {
+        return service.patchDiary(dto);
     }
 
-    //------------------------------- 다이어리 페이징 처리 -------------------------------
+    //------------------------------- 다이어리 페 -------------------------------
     @Operation(summary = "다이어리 페이징",description = "조회 완료 :result(1), 조회 실패 :result(0)")
     @Parameters(value = {
             @Parameter(name = "userid", description = "유저")
             ,@Parameter(name = "page", description = "페이지")
     })
     @GetMapping
-    public List<DiarySelVo> TestGetDiary(DiarySelDto dto) {
-        return service.DiaryGetVo(dto);
+    public List<DiarySelVo> getDiary(DiarySelDto dto) {
+        return service.getDiary(dto);
     }
 
 }

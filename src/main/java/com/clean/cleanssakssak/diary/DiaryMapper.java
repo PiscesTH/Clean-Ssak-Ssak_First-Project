@@ -8,22 +8,20 @@ import java.util.List;
 @Mapper
 public interface DiaryMapper {
 
-    int DiaryIns(DiaryInsDto dto); //다이어리 작성
+    int insDiary(DiaryInsDto dto); //다이어리 작성
 
-    int DiaryInsPic(DiaryInsPicDto dto); // 다이어리 사진
+    int insDiaryPic(DiaryInsPicDto dto); // 다이어리 사진
 
+    int delDiary(DiaryDelDto dto); //다이어리 삭제
 
-    int DiaryPicDel(DiaryDelDto dto); // 다이어리 사진 삭제
+    int delDiaryPic(DiaryDelDto dto); // 다이어리 사진 삭제
 
-    int DiaryDel(DiaryDelDto dto); //다이어리 삭제
+    int UpdDiary(DiaryUpdDto dto); //다이어리 수정
 
+    int delDiaryPic(DiaryUpdDto dto); // 다이어리 사진 수정
 
-    int DiaryUpt(DiaryUptDto dto); //다이어리 수정
-
-    int DiaryPicDel(DiaryUptDto dto); // 다이어리 사진 수정
-
-    List<DiarySelVo> DiarySelAll(DiarySelDto dto); // 페이징처리
-    List<String> DiaryPicAll (int diaryId); //사진
+    List<DiarySelVo> selDiaryAll(DiarySelDto dto); // 다이어리 전체 조회
+    List<String> selDiaryPicAll (int diaryId); //다이어리 전체 사진 조회
 
 }
 

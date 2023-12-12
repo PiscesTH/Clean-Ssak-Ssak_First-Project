@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@Schema(title = "다이어리 조회")
+@Schema(title = "다이어리 전체 조회 시 응답 데이터")
 public class DiarySelVo {
     @Schema(title = "유저")
     private int loginedUserId;

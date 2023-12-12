@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(title = "다이어리 페이징 처리")
+@Schema(title = "다이어리 전체 조회 시 필요한 데이터/ 페이징 처리 포함")
 public class DiarySelDto {
     @Schema(title = "유저")
     private int loginedUserId;
@@ -14,7 +14,7 @@ public class DiarySelDto {
     private int page;
 
     @JsonIgnore
-    private int startIdx;
+    private int startIdx;//
     @JsonIgnore
     private int rowCount = Const.DIARY_ROW_COUNT;
     @JsonIgnore

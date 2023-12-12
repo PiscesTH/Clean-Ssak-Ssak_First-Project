@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@Schema(title = "다이어리 사진 작업")
+@Schema(title = "다이어리 작성 시 사진만 따로 INSERT시 필요한 데이터")
 public class DiaryInsPicDto {
     @Schema(title = "다이어리 번호")
     private int diaryId;
