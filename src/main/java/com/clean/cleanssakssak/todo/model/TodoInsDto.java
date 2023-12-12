@@ -5,7 +5,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-public class TodoInsDto {// todo 작성 시 필요한 데이터
+@Schema(title = "todo 작성 시 필요한 데이터")
+public class TodoInsDto {
     @Schema(description = "로그인 한 유저의 userId")
     private int loginedUserId;
     @Schema(description = "청소 목표")

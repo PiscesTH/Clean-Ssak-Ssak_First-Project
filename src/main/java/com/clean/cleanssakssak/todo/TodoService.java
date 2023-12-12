@@ -49,7 +49,7 @@ public class TodoService {
     }
 
     // todo 내용 수정
-    public ResVo patchTodo(TodoUpDto dto){
+    public ResVo patchTodo(TodoUpdDto dto){
 
         String cleaning = dto.getCleaning();
         if(cleaning == null || cleaning.isBlank()) {//빈문자열 체크

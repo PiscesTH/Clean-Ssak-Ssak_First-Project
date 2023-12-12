@@ -5,7 +5,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-public class TodoSelAllDto {// todo 전체 조회 시 필요한 데이터
+@Schema(title = "todo 전체 조회 시 필요한 데이터")
+public class TodoSelAllDto {
     @Schema(description = "로그인 한 유저 userId")
     private int loginedUserId;
     @Schema(description = "페이지")

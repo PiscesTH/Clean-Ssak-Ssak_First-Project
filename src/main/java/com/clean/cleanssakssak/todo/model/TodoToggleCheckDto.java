@@ -5,7 +5,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-public class TodoToggleCheckDto {// 각 todo당 체크 시 필요한 데이터
+@Schema(title = "todo에 체크 시 필요한 데이터")
+public class TodoToggleCheckDto {
     @Schema(title = "todo를 삭제하고 싶은 유저의 PK")
     private int todoId;
     @Schema(title = "해당 todo의 PK")

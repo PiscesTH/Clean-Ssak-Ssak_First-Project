@@ -13,7 +13,7 @@ public interface TodoMapper {
 
     List<TodoSelAllVo> selTodoAll(TodoSelAllDto dto);// todo 리스트 전체 조회
 
-    int upTodo(TodoUpDto dto);// todo 내용 수정
+    int upTodo(TodoUpdDto dto);// todo 내용 수정
 
     int delTodo(TodoDelDto dto);// todo 삭제
 
