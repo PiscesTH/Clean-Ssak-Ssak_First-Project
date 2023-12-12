@@ -3,6 +3,24 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.clean.cleanssakssak.todo.TodoMapper">
+
+    <insert id="insTodo" useGeneratedKeys="true" keyProperty="todoId">
+        INSERT INTO t_todo
+        SET user_id = #{loginedUserId},
+        cleaning = #{cleaning},
+        do_day = #{doDay}
+    </insert>
+
+    <select id="selTodoAll">
+        SELECT todo_id AS todoId, cleaning,
+        do_day AS doDay, is_checked AS isChecked
+        FROM t_todo
+        WHERE user_id = #{loginedUserId}
+        AND is_del != 1
+        ORDER BY do_day
+        LIMIT #{startIdx}, #{rowCount}
+    </select>
+
     <update id="upTodo">
         UPDATE t_todo
         SET cleaning = #{cleaning},
@@ -27,22 +45,5 @@
         SET is_checked = #{check}
         WHERE todo_id = #{todoId} AND user_id = #{loginedUserId}
     </update>
-
-    <insert id="insTodo" useGeneratedKeys="true" keyProperty="todoId">
-        INSERT INTO t_todo
-        SET user_id = #{loginedUserId},
-        cleaning = #{cleaning},
-        do_day = #{doDay}
-    </insert>
-
-    <select id="selTodoAll">
-        SELECT todo_id AS todoId, cleaning,
-        do_day AS doDay, is_checked AS isChecked
-        FROM t_todo
-        WHERE user_id = #{loginedUserId}
-        AND is_del != 1
-        ORDER BY do_day
-        LIMIT #{startIdx}, #{rowCount}
-    </select>
 
 </mapper>

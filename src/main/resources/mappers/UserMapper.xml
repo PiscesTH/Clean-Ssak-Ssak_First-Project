@@ -15,6 +15,12 @@
             upw = #{upw},
             nickname = #{nickname}
     </insert>
+
+    <select id="selUserByNickname">
+        SELECT user_id
+        FROM t_user
+        WHERE nickname = #{nickname}
+    </select>
     
     <select id="selSigninPw">
         select upw
@@ -26,12 +32,6 @@
         select user_id AS loginedUserId, nickname
         from t_user
         where uid = #{uid}
-    </select>
-
-    <select id="selUserByNickname">
-        SELECT user_id
-        FROM t_user
-        WHERE nickname = #{nickname}
     </select>
 
     <update id="updUserUpw">

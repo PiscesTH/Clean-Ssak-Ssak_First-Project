@@ -18,7 +18,8 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private final UserMapper mapper;
 
-    public ResVo postSignup(UserInsSignupDto dto){// 회원가입 메소드
+    // 회원가입 메소드
+    public ResVo postSignup(UserInsSignupDto dto){
 
         dto.setUpw(BCrypt.hashpw(dto.getUpw(),BCrypt.gensalt()));// 비밀번호 암호화
         int idCheck = mapper.selIdComparison(dto.getUid());//ID 중복 체크
@@ -39,9 +40,8 @@ public class UserService {
         //위의 IF문에 해당되지 않는다면 INSERT 성공으로 해당 user_id값 리턴
     }
 
-    //----------------------------------------------------------------------
-
-    public UserSigninVo postSignin(UserSigninDto dto){// 로그인 인증 메소드
+    // 로그인 인증 메소드
+    public UserSigninVo postSignin(UserSigninDto dto){
 
         UserSigninVo vo = new UserSigninVo();
         String password = mapper.selSigninPw(dto);// 받아온 유저의 uid값을 이용해 해당 upw를 SELECT
@@ -63,22 +63,29 @@ public class UserService {
 
     //유저 회원정보(비밀번호, 닉네임) 변경 처리
     public ResVo patchProfile(UserUbdDto dto){
+
         int updResult = 0;
+
         if (dto.getUpw() != null && !dto.getUpw().isBlank()){
             String hashedUpw = BCrypt.hashpw(dto.getUpw(),BCrypt.gensalt());
             dto.setUpw(hashedUpw);
             updResult += mapper.updUserUpw(dto);
         }
+
         Integer nicknameCheck = mapper.selUserByNickname(dto.getNickname());
+
         if (nicknameCheck == null && dto.getNickname() != null && !dto.getNickname().isBlank()){
             updResult += mapper.updUserNickname(dto);
         }
+
         return new ResVo(updResult);
     }
 
     //유저 회원탈퇴 처리
     public ResVo delProfile(int loginedUserId){
+
         int delResult = mapper.delUser(loginedUserId);
         return new ResVo(delResult);
+
     }
 }
