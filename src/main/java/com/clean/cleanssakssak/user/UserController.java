@@ -35,6 +35,7 @@ public class UserController {
     public ResVo postSignup(@RequestBody UserInsSignupDto dto){
         return service.postSignup(dto);
     }
+
     //----------------------------------------------------------------------------
     @Operation(summary = "로그인 인증", description = "아이디/ 비밀번호를 활용한 인증처리\n" +
             "1: 성공, 2: 아이디 다름, 3: 비밀번호 다름")
@@ -61,7 +62,7 @@ public class UserController {
             result = 0 : 회원 탈퇴 실패
             """)
     @DeleteMapping("/profile")
-    public ResVo delProfile(@RequestParam("logined_user_id") int loginedUserId){
+    public ResVo delProfile(@RequestParam int loginedUserId){
         return service.delProfile(loginedUserId);
     }
 }

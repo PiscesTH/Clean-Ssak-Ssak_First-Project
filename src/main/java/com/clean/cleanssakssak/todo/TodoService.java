@@ -53,6 +53,12 @@ public class TodoService {
 
     //청소 todo 하나 등록
     public ResVo postTodo(TodoInsDto dto){
+        if (dto.getCleaning() == null || dto.getCleaning().isBlank()){
+            return new ResVo(Const.FAIL);
+        }
+        if (dto.getDoDay() == null || dto.getDoDay().isBlank()){
+            return new ResVo(Const.FAIL);
+        }
         String[] tmp = dto.getDoDay().split("/");
         List<String> list = new ArrayList<>(Arrays.asList(tmp));
         list.add(0, list.get(list.size() - 1));
