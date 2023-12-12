@@ -23,7 +23,7 @@
     </select>
 
     <select id="selSignin">
-        select user_id AS userID, nickname
+        select user_id AS loginedUserId, nickname
         from t_user
         where uid = #{uid}
     </select>

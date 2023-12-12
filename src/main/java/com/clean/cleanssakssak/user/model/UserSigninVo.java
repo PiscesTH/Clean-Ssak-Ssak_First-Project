@@ -8,7 +8,7 @@ public class UserSigninVo {
     @Schema(title = "실행 결과 값")
     private int result;
     @Schema(title =  "로그인 한 유저의 PK")
-    private int userId;
+    private int loginedUserId;
     @Schema(title = "로그인 한 유저의 별명 / 성함")
     private String nickname;
 }
