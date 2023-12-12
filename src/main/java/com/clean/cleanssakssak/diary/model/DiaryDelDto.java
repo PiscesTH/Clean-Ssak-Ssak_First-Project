@@ -7,7 +7,7 @@ import lombok.Data;
 @Schema(title = "다이어리 삭제 작업")
 public class DiaryDelDto {
     @Schema(title = "유저")
-    private int userId;
+    private int loginedUserId;
     @Schema(title = "다이어리 번호")
     private int diaryId;
 

@@ -7,7 +7,7 @@
     <insert id="DiaryIns" keyProperty="diary_id" useGeneratedKeys="true"> <!-- 다이어리 작성 -->
         INSERT INTO t_diary
         SET
-        user_id =#{userId}
+        user_id =#{loginedUserId}
         ,title =#{title}
         ,contents =#{contents}
     </insert>
@@ -26,7 +26,7 @@
         DELETE
         FROM t_diary
         WHERE diary_id = #{diaryId}
-        AND user_id = #{userId}
+        AND user_id = #{loginedUserId}
     </delete>
 
     <delete id="DiaryPicDel"> <!-- 다이어리 사진 삭제, 유저 확인 -->
@@ -34,7 +34,7 @@
         FROM t_diary A
         LEFT JOIN t_diary_pic B
         ON A.diary_id = B.diary_id
-        WHERE (A.diary_id, A.user_id) = (#{diaryId},#{userId});
+        WHERE (A.diary_id, A.user_id) = (#{diaryId},#{loginedUserId});
     </delete>
 
 
@@ -43,13 +43,13 @@
         set
         title = #{title}
         ,contents = #{contents}
-        WHERE user_id = #{userId} AND diary_id = #{diaryId}
+        WHERE user_id = #{loginedUserId} AND diary_id = #{diaryId}
     </update>
 
 
     <select id="DiarySelAll"> <!-- 다이어리 페이징처리 -->
         SELECT C.nickname
-        ,A.user_id as userId, A.title, A.contents, B.pic as pics
+        ,A.user_id as loginedUserId, A.title, A.contents, B.pic as pics
         ,A.created_at as createdAt
 
         FROM t_diary A
@@ -57,7 +57,7 @@
         ON A.diary_id = B.diary_id
         LEFT JOIN t_user C
         ON A.user_id = C.user_id
-        WHERE A.user_id = #{userId}
+        WHERE A.user_id = #{loginedUserId}
         ORDER BY A.diary_id DESC
         LIMIT #{startIdx},#{rowCount}
 

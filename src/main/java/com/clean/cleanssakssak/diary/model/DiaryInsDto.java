@@ -13,9 +13,8 @@ import java.util.List;
 public class DiaryInsDto {
     @JsonIgnore
     private int diary_id;
-
     @Schema(title = "유저")
-    private int userId;
+    private int loginedUserId;
     @Schema(title = "제목")
     private String title;
     @Schema(title = "내용")

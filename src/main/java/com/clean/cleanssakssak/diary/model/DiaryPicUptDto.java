@@ -9,7 +9,7 @@ import java.util.List;
 @Schema(title = "다이어리 ")
 public class DiaryPicUptDto {
     @Schema(title = "유저")
-    private int userId;
+    private int loginedUserId;
     @Schema(title = "다이어리 번호")
     private int diaryId;
     @Schema(title = "사진")

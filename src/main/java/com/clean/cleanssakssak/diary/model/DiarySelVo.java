@@ -8,8 +8,7 @@ import lombok.Data;
 @Schema(title = "다이어리 조회")
 public class DiarySelVo {
     @Schema(title = "유저")
-    private int userid;
-
+    private int loginedUserId;
     @JsonIgnore
     private int diaryId;
     @Schema(title = "닉네임")
