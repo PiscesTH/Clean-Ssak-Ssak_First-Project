@@ -45,7 +45,7 @@ public class TodoController {
             @Parameter(name = "userId", description = "todo를 삭제하고 싶은 유저의 PK"),
             @Parameter(name = "todoId", description = "해당 todo의 PK")
     })
-    @PostMapping()
+    @PostMapping("/check")
     public ResVo toggleCheck(TodoToggleCheckDto dto){
         return service.toggleCheck(dto);
     }
