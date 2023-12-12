@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService service;
 
-    @Operation(summary = "회원가입", description = "유저 회원가입 시 입력할 정보\n" +
-            "-1 : ID가 중복된다(실패)\n" +
-            "0 : nick_name이 중복된다(실패)\n" +
-            "user_id( PK값 ) : 회원가입 성공")
+    //---------------------------------- 유저 회원가입 ---------------------------------------
+    @Operation(summary = "회원가입", description = """
+            유저 회원가입 시 입력할 정보<br>
+            -1 : ID가 중복된다(실패)<br>
+            0 : nick_name이 중복된다(실패)<br>
+            user_id( PK값 ) : 회원가입 성공""")
     @Parameters(value = {
             @Parameter(name = "uid", description = "아이디"),
             @Parameter(name = "upw", description = "비밀번호"),
@@ -36,9 +38,10 @@ public class UserController {
         return service.postSignup(dto);
     }
 
-    //----------------------------------------------------------------------------------------------
-    @Operation(summary = "로그인 인증", description = "아이디/ 비밀번호를 활용한 인증처리\n" +
-            "1: 성공, 2: 아이디 다름, 3: 비밀번호 다름")
+    //---------------------------------- 유저 로그인 ---------------------------------------
+    @Operation(summary = "로그인 인증", description = """
+            아이디/ 비밀번호를 활용한 인증처리<br>
+            "1: 성공, 2: 아이디 다름, 3: 비밀번호 다름""")
     @Parameters(value = {
             @Parameter(name = "uid", description = "아이디"),
             @Parameter(name = "upw", description = "비밀번호")
@@ -48,7 +51,7 @@ public class UserController {
         return service.postSignin(dto);
     }
 
-    //----------------------------------------------------------------------------------------------
+    //---------------------------------- 유저 정보 수정 ---------------------------------------
     @Operation(summary = "유저의 비밀번호/닉네임 변경 처리", description = """
             result = 0 : 변경 실패<br>
             result > 0 : 변경 성공
@@ -58,7 +61,7 @@ public class UserController {
         return service.patchProfile(dto);
     }
 
-    //----------------------------------------------------------------------------------------------
+    //---------------------------------- 유저 탈퇴 처리 ---------------------------------------
     @Operation(summary = "회원 탈퇴 처리", description = """
             result = 1 : 회원 탈퇴 성공<br>
             result = 0 : 회원 탈퇴 실패

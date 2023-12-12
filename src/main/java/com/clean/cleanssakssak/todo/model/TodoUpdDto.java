@@ -4,7 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-public class TodoUpdDto {//todo 수정 시 받아올 데이터
+@Schema(title = "todo 수정 시 받아올 데이터")
+public class TodoUpdDto {
     @Schema(title = "todo를 수정하고 싶은 유저의 PK")
     private int loginedUserId;
     @Schema(title = "해당 todo의 PK")
