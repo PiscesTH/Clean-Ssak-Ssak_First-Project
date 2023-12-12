@@ -5,16 +5,14 @@ import com.clean.cleanssakssak.common.ResVo;
 import com.clean.cleanssakssak.user.model.UserInsSignupDto;
 import com.clean.cleanssakssak.user.model.UserSigninDto;
 import com.clean.cleanssakssak.user.model.UserSigninVo;
+import com.clean.cleanssakssak.user.model.UserUbdDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -47,5 +45,23 @@ public class UserController {
     @PostMapping("/signin")
     public UserSigninVo postSignin(@RequestBody UserSigninDto dto){
         return service.postSignin(dto);
+    }
+
+    @Operation(summary = "유저의 비밀번호/닉네임 변경 처리", description = """
+            result = 0 : 변경 실패<br>
+            result > 0 : 변경 성공
+            """)
+    @PatchMapping("/profile")
+    public ResVo patchProfile(@RequestBody UserUbdDto dto){
+        return service.patchProfile(dto);
+    }
+
+    @Operation(summary = "회원 탈퇴 처리", description = """
+            result = 1 : 회원 탈퇴 성공<br>
+            result = 0 : 회원 탈퇴 실패
+            """)
+    @DeleteMapping("/profile")
+    public ResVo delProfile(@RequestParam("logined_user_id") int loginedUserId){
+        return service.delProfile(loginedUserId);
     }
 }

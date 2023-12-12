@@ -6,6 +6,7 @@ import com.clean.cleanssakssak.common.ResVo;
 import com.clean.cleanssakssak.user.model.UserInsSignupDto;
 import com.clean.cleanssakssak.user.model.UserSigninDto;
 import com.clean.cleanssakssak.user.model.UserSigninVo;
+import com.clean.cleanssakssak.user.model.UserUbdDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
@@ -56,5 +57,26 @@ public class UserService {
         vo.setResult(Const.PW_FAIL);//위의 IF문에 다 해당되지 않는다면 upw가 틀렸다는 뜻
 
         return vo;
+    }
+
+    //유저 회원정보(비밀번호, 닉네임) 변경 처리
+    public ResVo patchProfile(UserUbdDto dto){
+        int updResult = 0;
+        if (dto.getUpw() != null && !dto.getUpw().isBlank()){
+            String hashedUpw = BCrypt.hashpw(dto.getUpw(),BCrypt.gensalt());
+            dto.setUpw(hashedUpw);
+            updResult += mapper.updUserUpw(dto);
+        }
+        Integer nicknameCheck = mapper.selUserByNickname(dto.getNickname());
+        if (nicknameCheck == null && dto.getNickname() != null && !dto.getNickname().isBlank()){
+            updResult += mapper.updUserNickname(dto);
+        }
+        return new ResVo(updResult);
+    }
+
+    //유저 회원탈퇴 처리
+    public ResVo delProfile(int loginedUserId){
+        int delResult = mapper.delUser(loginedUserId);
+        return new ResVo(delResult);
     }
 }

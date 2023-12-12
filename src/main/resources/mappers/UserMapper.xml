@@ -12,8 +12,8 @@
     <insert id="insUserSignup" useGeneratedKeys="true" keyProperty="userId">
         INSERT INTO t_user
         SET uid = #{uid},
-        upw = #{upw},
-        nickname = #{nickname}
+            upw = #{upw},
+            nickname = #{nickname}
     </insert>
     
     <select id="selSigninPw">
@@ -21,9 +21,33 @@
         from t_user
         where uid = #{uid}
     </select>
+
     <select id="selSignin">
         select user_id AS userID, nickname
         from t_user
         where uid = #{uid}
     </select>
+
+    <select id="selUserByNickname">
+        SELECT user_id
+        FROM t_user
+        WHERE nickname = #{nickname}
+    </select>
+
+    <update id="updUserUpw">
+        UPDATE t_user
+        SET upw = #{upw}
+        WHERE user_id = #{loginedUserId}
+    </update>
+
+    <update id="updUserNickname">
+        UPDATE t_user
+        SET nickname = #{nickname}
+        WHERE user_id = #{loginedUserId}
+    </update>
+
+    <delete id="delUser">
+        DELETE FROM t_user
+        WHERE user_id = #{loginedUserId}
+    </delete>
 </mapper>
