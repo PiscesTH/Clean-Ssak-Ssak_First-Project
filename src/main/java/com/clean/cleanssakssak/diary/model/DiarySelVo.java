@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Schema(title = "다이어리 조회")
 public class DiarySelVo {
     @Schema(title = "유저")
     private int loginedUserId;
-    @JsonIgnore
+
     private int diaryId;
     @Schema(title = "닉네임")
     private String nickname;
@@ -18,7 +20,7 @@ public class DiarySelVo {
     @Schema(title = "내용")
     private String contents;
     @Schema(title = "사진")
-    private String pics;
+    private List<String> pics;
     @Schema(title = "작성일")
     private String createdAt;
 

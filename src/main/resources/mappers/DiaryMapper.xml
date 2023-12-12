@@ -47,20 +47,24 @@
     </update>
 
 
-    <select id="DiarySelAll"> <!-- 다이어리 페이징처리 -->
+    <select id="testDiarySelAll"> <!-- 다이어리 페이징처리 -->
         SELECT C.nickname
-        ,A.user_id as loginedUserId, A.title, A.contents, B.pic as pics
-        ,A.created_at as createdAt
+        ,A.user_id as userId, A.title, A.contents
+        ,A.created_at as createdAt,A.diary_id as diaryId
 
         FROM t_diary A
-        JOIN t_diary_pic B
-        ON A.diary_id = B.diary_id
         LEFT JOIN t_user C
         ON A.user_id = C.user_id
-        WHERE A.user_id = #{loginedUserId}
+        WHERE A.user_id = #{userId}
         ORDER BY A.diary_id DESC
         LIMIT #{startIdx},#{rowCount}
 
+    </select>
+
+    <select id="testDiaryPicAll">
+        SELECT pic
+        FROM t_diary_pic
+        WHERE diary_id = #{diaryId}
     </select>
 
 
