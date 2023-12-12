@@ -7,25 +7,25 @@
         UPDATE t_todo
         SET cleaning = #{cleaning},
         do_day = #{doDay}
-        WHERE todo_id = #{todoId} AND user_id = #{userId}
+        WHERE todo_id = #{todoId} AND user_id = #{loginedUserId}
     </update>
 
     <delete id="delTodo">
         DELETE
         FROM t_todo
-        WHERE todo_id = #{todoId} AND user_id = #{userId}
+        WHERE todo_id = #{todoId} AND user_id = #{loginedUserId}
     </delete>
     
     <select id="selCheck">
         SELECT is_checked
         FROM t_todo
-        where todo_id = #{todoId} AND user_id = #{userId}
+        where todo_id = #{todoId} AND user_id = #{loginedUserId}
     </select>
 
     <update id="upCheck">
         update t_todo
         SET is_checked = #{check}
-        WHERE todo_id = #{todoId} AND user_id = #{userId}
+        WHERE todo_id = #{todoId} AND user_id = #{loginedUserId}
     </update>
 
     <insert id="insTodo" useGeneratedKeys="true" keyProperty="todoId">
