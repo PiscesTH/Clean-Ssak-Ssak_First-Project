@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ResVo {
+public class ResVo {// 응답에 쓰일 클래스
     private int result;
 }
