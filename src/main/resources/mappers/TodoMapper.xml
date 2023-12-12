@@ -25,6 +25,7 @@
     <update id="upCheck">
         update t_todo
         SET is_checked = #{check}
+        WHERE todo_id = #{todoId} AND user_id = #{userId}
     </update>
 
     <insert id="insTodo" useGeneratedKeys="true" keyProperty="todoId">
