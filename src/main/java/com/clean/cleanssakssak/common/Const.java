@@ -12,6 +12,8 @@ public class Const {// 주로 사용되는 응답값 상수 정의
     public static final int SUCCESS = 1;// 성공 시 응답값
 
     public static final int ID_DUPLICATED = -1; // usersignup ID가 중복됨
+    public static final int NICKNAME_DUPLICATED = 0; // usersignup 닉네임이 중복됨
+    public static final int ID_NICKNAME_NULL = -2; // usersignup ID와 닉네임 데이터가 없음
     public static final int ID_FAIL = 2; // usersignin ID가 다르다
     public static final int PW_FAIL = 3; // usersignin PW가 다르다
 
