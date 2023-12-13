@@ -8,7 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Schema(title = "todo 전체 조회 시 응답할 전체 리스트 데이터")
 public class TodoSelAllVo {
-    @Schema(description = "할 일 pk")
+    @Schema(description = "todo pk")
     private int todoId;
     @Schema(description = "청소 할 일")
     private String cleaning;

@@ -8,6 +8,6 @@ import lombok.Data;
 public class TodoDelDto {
     @Schema(title = "해당 todo PK")
     private int todoId;
-    @Schema(title = "todo 삭제하고 싶은 유저의 PK")
+    @Schema(title = "로그인 한 유저 pk")
     private int loginedUserId;
 }
