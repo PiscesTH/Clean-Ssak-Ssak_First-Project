@@ -38,7 +38,7 @@
 
     <update id="updDiary"> <!-- 다이어리 제목 내용 수정 -->
         UPDATE t_diary
-        set
+        SET
         title = #{title}
         ,contents = #{contents}
         WHERE user_id = #{loginedUserId} AND diary_id = #{diaryId}
@@ -61,8 +61,5 @@
         FROM t_diary_pic
         WHERE diary_id = #{diaryId}
     </select>
-
-
-
 
 </mapper>
