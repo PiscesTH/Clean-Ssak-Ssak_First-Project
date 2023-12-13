@@ -21,28 +21,28 @@ public class TodoService {
         if (dto.getCleaning() == null || dto.getCleaning().isBlank()){  //cleaning 데이터가 null 이거나 공백만 있는 경우 체크
             return new ResVo(Const.FAIL);
         }
-        if (dto.getDoDay() == null || dto.getDoDay().isBlank()){    //do_day
+        if (dto.getDoDay() == null || dto.getDoDay().isBlank()){    //do_day 데이터가 null 이거나 공백만 있는 경우 체크
             return new ResVo(Const.FAIL);
         }
 
-        String[] tmp = dto.getDoDay().split("/");
+        String[] tmp = dto.getDoDay().split("/");   //입력받은 날짜 데이터 원하는 형식으로 변경
         List<String> list = new ArrayList<>(Arrays.asList(tmp));
         list.add(0, list.get(list.size() - 1));
         list.remove(list.size() - 1);
         String date = String.join("-", list);
-        dto.setDoDay(date);
+        dto.setDoDay(date);     //원하는 데이터 형식으로 변경한 날짜 세팅
 
         int insResult = mapper.insTodo(dto);
 
-        return new ResVo(dto.getTodoId());
+        return new ResVo(dto.getTodoId());  //등록한 todo pk값 리턴
 
     }
 
     //등록한 todo 전체 조회(한 페이지에 8개씩 페이징 처리)
     public List<TodoSelAllVo> getTodoAll(TodoSelAllDto dto) {
 
-        dto.setRowCount(Const.TODO_ROW_COUNT);
-        dto.setStartIdx((dto.getPage()-1) * Const.TODO_ROW_COUNT);
+        dto.setRowCount(Const.TODO_ROW_COUNT);  //페이징 처리에 필요한 데이터 설정
+        dto.setStartIdx((dto.getPage()-1) * Const.TODO_ROW_COUNT);  //페이징 처리에 필요한 데이터 설정
 
         return mapper.selTodoAll(dto);
 
@@ -56,7 +56,7 @@ public class TodoService {
             return new ResVo(Const.FAIL);
         }
 
-        String[] dayArr= dto.getDoDay().split("/");
+        String[] dayArr= dto.getDoDay().split("/");     //입력받은 날짜 데이터 원하는 형식으로 변경
         List<String> dayList = new ArrayList<>(Arrays.asList(dayArr));
 
         dayList.add(0, dayList.get(dayList.size()-1));
@@ -64,7 +64,7 @@ public class TodoService {
 
         String day = String.join("-",dayList);
 
-        dto.setDoDay(day);
+        dto.setDoDay(day);      //원하는 데이터 형식으로 변경한 날짜 세팅
         int result = mapper.upTodo(dto);
 
         return new ResVo(result);
