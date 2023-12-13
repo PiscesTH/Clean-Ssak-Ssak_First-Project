@@ -5,6 +5,7 @@ import com.clean.cleanssakssak.diary.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/diary")
 @RequiredArgsConstructor
+@Tag(name = "다이어리 API", description = "다이어리 관련 정보 처리")
 public class DiaryController {
 
     private final DiaryService service;
