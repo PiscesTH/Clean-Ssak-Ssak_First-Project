@@ -38,8 +38,7 @@ public class DiaryService {
 
     // 다이어리 삭제
     public ResVo delDiary(DiaryDelDto dto) {
-        int delPicsResult = mapper.delDiaryPics(dto); // 사진 삭제
-        int delDiaryResult = mapper.delDiary(dto); // 다이어리 삭제
+        int delDiaryResult = mapper.delDiary(dto); // 다이어리 삭제 표시
         return new ResVo(delDiaryResult); // 0,1 표시
     }
 
@@ -57,7 +56,7 @@ public class DiaryService {
                 .loginedUserId(dto.getLoginedUserId())
                 .build());
         if (dto.getPics() == null){      //받아온 사진 리스트 데이터가 null인지 체크
-            return new ResVo(dto.getDiaryId());
+            return new ResVo(Const.SUCCESS);
         }
         List<String> picsList = new ArrayList<>();
         for (String pic : dto.getPics()) {
