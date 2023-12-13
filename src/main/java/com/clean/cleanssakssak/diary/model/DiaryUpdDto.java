@@ -8,15 +8,15 @@ import java.util.List;
 @Data
 @Schema(title = "다이어리 수정 시 필요한 데이터")
 public class DiaryUpdDto {
-    @Schema(title = "유저")
+    @Schema(title = "로그인 한 유저 pk")
     private int loginedUserId;
-    @Schema(title = "다이어리 번호")
+    @Schema(title = "다이어리 pk")
     private int diaryId;
-    @Schema(title = "제목")
+    @Schema(title = "다이어리 제목")
     private String title;
-    @Schema(title = "내용")
+    @Schema(title = "다이어리 내용")
     private String contents;
-    @Schema(title = "사진")
+    @Schema(title = "다이어리 사진")
     private List<String> pics;
 
 }

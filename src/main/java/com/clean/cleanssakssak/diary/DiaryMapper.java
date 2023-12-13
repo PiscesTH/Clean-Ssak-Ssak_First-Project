@@ -10,7 +10,7 @@ public interface DiaryMapper {
 
     int insDiary(DiaryInsDto dto); //다이어리 작성
 
-    int insDiaryPic(DiaryInsPicDto dto); // 다이어리 사진
+    int insDiaryPic(DiaryInsPicProcDto dto); // 다이어리 사진
 
     int delDiary(DiaryDelDto dto); //다이어리 삭제
 

@@ -23,7 +23,7 @@ public class DiaryService {
             List<String> pics = dto.getPics(); //다이어리 작성에 사용할 사진 가져와서
 
             if (pics != null && !pics.isEmpty()) { //pics 첨부할 사진이 존재하는지 확인,pics 하나 이상 있으면 참
-                DiaryInsPicDto picDto = new DiaryInsPicDto(); // 사진정보
+                DiaryInsPicProcDto picDto = new DiaryInsPicProcDto(); // 사진정보
                 picDto.setDiaryId(dto.getDiary_id()); //식별자 설정
                 picDto.setPics(pics); // 사진 설정
                 int picInsResult = mapper.insDiaryPic(picDto); //사진정보 전달
@@ -50,7 +50,7 @@ public class DiaryService {
             int result2 = mapper.delDiaryPic(dto); // 사진 삭제
             List<String> pics = dto.getPics(); //사진 가져오기
             if (pics != null && !pics.isEmpty()) { //pics 첨부할 사진이 존재하는지 확인,pics 하나 이상 있으면 참
-                DiaryInsPicDto picDto = new DiaryInsPicDto(); // 사진정보 확인
+                DiaryInsPicProcDto picDto = new DiaryInsPicProcDto(); // 사진정보 확인
                 picDto.setDiaryId(dto.getDiaryId()); //식별자 설정
                 picDto.setPics(dto.getPics()); // 사진 설정
                 int picInsResult = mapper.insDiaryPic(picDto); //사진정보 전달
