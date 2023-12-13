@@ -28,7 +28,11 @@
         WHERE todo_id = #{todoId} AND user_id = #{loginedUserId}
     </update>
 
-
+    <update id="delTodo">
+        UPDATE t_todo
+        SET is_del = #{isDel}
+        WHERE todo_id = #{todoId} AND user_id = #{loginedUserId}
+    </update>
     <select id="selCheck">
         SELECT is_checked
         FROM t_todo

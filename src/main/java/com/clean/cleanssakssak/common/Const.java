@@ -1,5 +1,7 @@
 package com.clean.cleanssakssak.common;
 
+import javax.swing.plaf.PanelUI;
+
 public class Const {// 주로 사용되는 응답값 상수 정의
 
     public static final int TODO_ROW_COUNT = 8;// todo 페이징 처리
@@ -20,4 +22,5 @@ public class Const {// 주로 사용되는 응답값 상수 정의
     public static final int CHECK_ON = 1; //check시 is_checked에 들어갈 값
     public static final int CHECK_OFF = 0; //check 삭제 시 is_checked에 들어갈 값
     public static final int CANCEL = 2; // check 취소 성공 값
+    public static final int IS_DEL = 1;// todo 삭제 시 쓰일 값
 }
