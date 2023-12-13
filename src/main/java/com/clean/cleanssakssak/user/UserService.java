@@ -30,7 +30,11 @@ public class UserService {
         }
 
         if(nmCheck != null){// NickName 중복으로 회원가입 실패 시 응답값
-            return new ResVo(Const.FAIL);
+            return new ResVo(Const.NICKNAME_DUPLICATED);
+        }
+
+        if(dto.getUid().isBlank() || dto.getNickname().isBlank()){//ID와 NickName 공란
+            return new ResVo(Const.ID_NICKNAME_NULL);
         }
 
         int result = mapper.insUserSignup(dto);
