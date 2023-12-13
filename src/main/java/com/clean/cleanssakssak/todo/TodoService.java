@@ -84,11 +84,11 @@ public class TodoService {
 
         if(result == 1){// 이미 check가 되어있는경우
             dto.setCheck(Const.CHECK_OFF);
-            mapper.upCheck(dto);//체크 취소 update
+            mapper.updCheck(dto);//체크 취소 update
             return new ResVo(Const.CANCEL);
         }else if (result == 0){// check가 없는 경우
             dto.setCheck(Const.CHECK_ON);// 체크 update
-            mapper.upCheck(dto);
+            mapper.updCheck(dto);
             return new ResVo(Const.SUCCESS);
         }
 

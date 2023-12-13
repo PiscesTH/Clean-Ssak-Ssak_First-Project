@@ -16,12 +16,12 @@
         do_day AS doDay, is_checked AS isChecked
         FROM t_todo
         WHERE user_id = #{loginedUserId}
-        AND is_del != 1
+        AND is_del = 0
         ORDER BY do_day
         LIMIT #{startIdx}, #{rowCount}
     </select>
 
-    <update id="upTodo">
+    <update id="updTodo">
         UPDATE t_todo
         SET cleaning = #{cleaning},
         do_day = #{doDay}
