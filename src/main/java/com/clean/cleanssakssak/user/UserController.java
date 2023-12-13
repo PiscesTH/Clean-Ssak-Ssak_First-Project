@@ -25,6 +25,8 @@ public class UserController {
     //---------------------------------- 유저 회원가입 ---------------------------------------
     @Operation(summary = "회원가입", description = """
             유저 회원가입 시 입력할 정보<br>
+            -3 : 비밀번호가 null 혹은 빈 문자열<br>
+            -2 : ID, 닉네임이 null 혹은 빈 문자열<br>
             -1 : ID가 중복된다(실패)<br>
             0 : nick_name이 중복된다(실패)<br>
             user_id( PK값 ) : 회원가입 성공""")
