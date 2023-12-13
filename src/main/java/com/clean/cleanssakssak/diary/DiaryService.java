@@ -39,7 +39,6 @@ public class DiaryService {
         return new ResVo(dto.getDiary_id()); // 성공시 diary pk값
     }
 
-
     // 다이어리 삭제
     public ResVo delDiary(DiaryDelDto dto) {
         int result = mapper.delDiaryPic(dto); // 사진 삭제
@@ -52,10 +51,11 @@ public class DiaryService {
         if (dto.getTitle() == null || dto.getTitle().isBlank()) {
             return new ResVo(Const.DIARY_TITLE_MISSING); // 제목 null 값이거나 제목 빈 문자열 일 경우 -1
         }
-        int result = mapper.UpdDiary(dto);
+        int result = mapper.updDiary(dto);
         if (result == 1) { //수정 성공시
             int result2 = mapper.delDiaryPic(dto); // 사진 삭제
             List<String> pics = dto.getPics(); //사진 가져오기
+
             if (pics != null && !pics.isEmpty()) { //pics 첨부할 사진이 존재하는지 확인,pics 하나 이상 있으면 참
                 DiaryInsPicProcDto picDto = new DiaryInsPicProcDto(); // 사진정보 확인
                 picDto.setDiaryId(dto.getDiaryId()); //식별자 설정

@@ -16,7 +16,7 @@ public interface DiaryMapper {
 
     int delDiaryPic(DiaryDelDto dto); // 다이어리 사진 삭제
 
-    int UpdDiary(DiaryUpdDto dto); //다이어리 수정
+    int updDiary(DiaryUpdDto dto); //다이어리 수정
 
     int delDiaryPic(DiaryUpdDto dto); // 다이어리 사진 수정
 
