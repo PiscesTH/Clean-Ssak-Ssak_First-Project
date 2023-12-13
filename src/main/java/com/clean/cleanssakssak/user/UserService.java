@@ -21,6 +21,10 @@ public class UserService {
     // 회원가입 메소드
     public ResVo postSignup(UserInsSignupDto dto){
 
+        if(dto.getUpw() == null){//upw가 null로 들어왔을 때 회원가입 실패 응답값
+            return new ResVo(Const.PASSWORD_NULL);
+        }
+
         dto.setUpw(BCrypt.hashpw(dto.getUpw(),BCrypt.gensalt()));// 비밀번호 암호화
         int idCheck = mapper.selIdComparison(dto.getUid());//ID 중복 체크
         Integer nmCheck = mapper.selUserByNickname(dto.getNickname());
@@ -33,7 +37,7 @@ public class UserService {
             return new ResVo(Const.NICKNAME_DUPLICATED);
         }
 
-        if(dto.getUid().isBlank() || dto.getNickname().isBlank()){//ID와 NickName 공란
+        if(dto.getUid().isBlank() || dto.getNickname().isBlank()|| dto.getUpw().isBlank()){//ID와 NickName 공란
             return new ResVo(Const.ID_NICKNAME_NULL);
         }
 
