@@ -7,9 +7,9 @@
     <insert id="insDiary" useGeneratedKeys="true" keyProperty="diaryId" > <!-- 다이어리 작성 -->
         INSERT INTO t_diary
         SET
-        user_id =#{loginedUserId}
-        ,title =#{title}
-        ,contents =#{contents}
+        user_id = #{loginedUserId}
+        ,title = #{title}
+        ,contents = #{contents}
     </insert>
 
     <insert id="insDiaryPic"> <!-- 다이어리 사진 넣기-->
