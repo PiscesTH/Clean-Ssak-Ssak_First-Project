@@ -23,7 +23,7 @@ public class DiaryService {
             // stream : 리스트나 배열을 스트림으로 변환 (사진의 주소값)
             // anymatch 특정 조건을 만족하는 요소가 하나라도 있으면 true 반환하고 실행 X
             // pics -> pics 람다 표현식,변수명상관x, 문자열을 pic 으로 받아들임, null값이거나 빈문자열 확인 뭔말임?
-            return new ResVo(DIARY_PICS_MISSING); // pics의 값 중에 null이거나 빈 문자열이 있는 경우 -2
+            return new ResVo(DIARY_PICS_MISSING); // pics의 배열 안 값 중에 null이거나 빈 문자열이 있는 경우 -2
         }
 
         int result = mapper.insDiary(dto);
