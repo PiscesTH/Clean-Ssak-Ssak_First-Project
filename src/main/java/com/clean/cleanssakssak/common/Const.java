@@ -8,7 +8,6 @@ public class Const {// 주로 사용되는 응답값 상수 정의
     public static final int DIARY_ROW_COUNT = 10;// diary 페이징 처리
 
     public static final int DIARY_TITLE_MISSING = -1;// diary 타이틀 없음으로 실패 응답값
-    public static final int DIARY_PICS_MISSING = -2;// diary 사진 없음으로 실패 응답값
 
     public static final int FAIL = 0;// 실패 시 응답값
     public static final int SUCCESS = 1;// 성공 시 응답값
