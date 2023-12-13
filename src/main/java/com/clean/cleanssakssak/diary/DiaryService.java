@@ -20,17 +20,17 @@ public class DiaryService {
             return new ResVo(Const.DIARY_TITLE_MISSING); // 제목 null 값이거나 제목 빈 문자열 일 경우 -1
         }
         int insDiaryResult = mapper.insDiary(dto);
-        if (dto.getPics() == null){
+        if (dto.getPics() == null){     //받아온 사진 리스트 데이터가 null인지 체크
             return new ResVo(dto.getDiaryId());
         }
         List<String> picsList = new ArrayList<>();
         for (String pic : dto.getPics()) {
-            if (pic != null && !pic.isBlank()) {
-                picsList.add(pic);
+            if (pic != null && !pic.isBlank()) {    //받은 사진 데이터가 null or 빈 문자열인지 체크
+                picsList.add(pic);                  //저장할 사진 데이터 분류
             }
         }
-        dto.setPics(picsList);
-        if (!picsList.isEmpty()) {
+        dto.setPics(picsList);  //분류한 사진 데이터 세팅
+        if (!picsList.isEmpty()) {  //등록할 사진 있는지 체크
             int insPicsResult = mapper.insDiaryPic(dto);
         }
         return new ResVo(dto.getDiaryId());
@@ -38,9 +38,9 @@ public class DiaryService {
 
     // 다이어리 삭제
     public ResVo delDiary(DiaryDelDto dto) {
-        int result = mapper.delDiaryPics(dto); // 사진 삭제
-        int result2 = mapper.delDiary(dto); // 다이어리 삭제
-        return new ResVo(result2); // 0,1 표시
+        int delPicsResult = mapper.delDiaryPics(dto); // 사진 삭제
+        int delDiaryResult = mapper.delDiary(dto); // 다이어리 삭제
+        return new ResVo(delDiaryResult); // 0,1 표시
     }
 
     // 다이어리 수정
@@ -56,6 +56,9 @@ public class DiaryService {
                 .diaryId(dto.getDiaryId())
                 .loginedUserId(dto.getLoginedUserId())
                 .build());
+        if (dto.getPics() == null){      //받아온 사진 리스트 데이터가 null인지 체크
+            return new ResVo(dto.getDiaryId());
+        }
         List<String> picsList = new ArrayList<>();
         for (String pic : dto.getPics()) {
             if (pic != null && !pic.isBlank()) {    //받은 사진 데이터가 null or 빈 문자열인지 체크
@@ -63,7 +66,7 @@ public class DiaryService {
             }
         }
         dto.setPics(picsList);  //분류된 사진 데이터 세팅
-        if (!picsList.isEmpty()) {     //등록할 사진 없는지 체크
+        if (!picsList.isEmpty()) {     //등록할 사진 있는지 체크
             int insPicsResult = mapper.insDiaryPic(DiaryInsDto.builder()    //사진 등록
                     .diaryId(dto.getDiaryId())
                     .pics(dto.getPics())
