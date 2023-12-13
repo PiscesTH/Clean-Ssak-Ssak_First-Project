@@ -28,7 +28,7 @@
         where uid = #{uid}
     </select>
 
-    <select id="selSignin">
+    <select id="selSigninInfo">
         select user_id AS loginedUserId, nickname
         from t_user
         where uid = #{uid}

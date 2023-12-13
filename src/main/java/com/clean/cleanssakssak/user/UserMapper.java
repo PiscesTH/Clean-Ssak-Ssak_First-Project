@@ -14,7 +14,7 @@ public interface UserMapper {
 
     String selSigninPw(UserSigninDto dto);// 로그인 성공 유/무를 위한 upw SELECT
 
-    UserSigninVo selSignin(UserSigninDto dto);// 로그인 성공 시 해당 유저의 정보 SELECT
+    UserSigninVo selSigninInfo(UserSigninDto dto);// 로그인 성공 시 해당 유저의 정보 SELECT
 
     int updUserUpw(UserUbdDto dto);// 유저 정보 수정 시 비밀번호 변경
 

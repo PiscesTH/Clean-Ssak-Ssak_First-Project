@@ -55,7 +55,7 @@ public class UserService {
             return vo;
         }else if(BCrypt.checkpw(dto.getUpw(), password)){
             //upw를 SELECT 했다면 암호화 된 password가 고객이 입력한 dto.getUpw와 같은지 체크
-            vo = mapper.selSignin(dto);//true라면 로그인 성공 해당 유저의 정보를 SELECT
+            vo = mapper.selSigninInfo(dto);//true라면 로그인 성공 해당 유저의 정보를 SELECT
             vo.setResult(Const.SUCCESS);
             return vo;
         }
