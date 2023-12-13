@@ -46,7 +46,7 @@
 
     <select id="selDiaryAll"> <!-- 다이어리 페이징처리 -->
         SELECT C.nickname
-        ,A.user_id as userId, A.title, A.contents
+        ,A.user_id as loginedUserId, A.title, A.contents
         ,A.created_at as createdAt,A.diary_id as diaryId
         FROM t_diary A
         LEFT JOIN t_user C
