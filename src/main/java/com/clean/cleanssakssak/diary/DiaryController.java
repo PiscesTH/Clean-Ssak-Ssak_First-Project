@@ -56,8 +56,8 @@ public class DiaryController {
         return service.patchDiary(dto);
     }
 
-    //------------------------------- 다이어리 페 -------------------------------
-    @Operation(summary = "다이어리 페이징",description = "조회 완료 :result(1), <br>조회 실패 :result(0)")
+    //------------------------------- 다이어리 전체 조회 -------------------------------
+    @Operation(summary = "다이어리 조회",description = "조회 완료 :result(1), <br>조회 실패 :result(0)")
     @Parameters(value = {
             @Parameter(name = "userid", description = "유저")
             ,@Parameter(name = "page", description = "페이지")
