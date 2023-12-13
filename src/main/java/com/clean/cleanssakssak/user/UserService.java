@@ -21,12 +21,13 @@ public class UserService {
     // 회원가입 메소드
     public ResVo postSignup(UserInsSignupDto dto){
 
-        if(dto.getUpw() == null){//upw가 null로 들어왔을 때 회원가입 실패 응답값
+        if(dto.getUpw() == null || dto.getUpw().isBlank()){//upw가 null 혹은 빈 문자열로 들어왔을 때 회원가입 실패 응답값
             return new ResVo(Const.PASSWORD_NULL);
         }
 
-        if(dto.getUid().isBlank() || dto.getNickname().isBlank()|| dto.getUpw().isBlank()){//ID와 NickName 공란
-            return new ResVo(Const.ID_NICKNAME_PW_NULL);
+        if(dto.getUid() == null || dto.getNickname() == null ||
+                dto.getUid().isBlank() || dto.getNickname().isBlank()){//ID와 NickName 공란
+            return new ResVo(Const.ID_NICKNAME_NULL);
         }
 
         int idCheck = mapper.selIdComparison(dto.getUid());//ID 중복 체크
