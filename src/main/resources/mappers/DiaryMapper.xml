@@ -28,7 +28,7 @@
         AND user_id = #{loginedUserId}
     </delete>
 
-    <delete id="delDiaryPic"> <!-- 다이어리 사진 삭제, 유저 확인 -->
+    <delete id="delDiaryPics"> <!-- 다이어리 사진 삭제, 유저 확인 -->
         DELETE B
         FROM t_diary A
         LEFT JOIN t_diary_pic B

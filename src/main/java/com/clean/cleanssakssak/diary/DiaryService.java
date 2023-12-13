@@ -6,6 +6,7 @@ import com.clean.cleanssakssak.diary.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,30 +19,26 @@ public class DiaryService {
         if (dto.getTitle() == null || dto.getTitle().isBlank()) {
             return new ResVo(Const.DIARY_TITLE_MISSING); // 제목 null 값이거나 제목 빈 문자열 일 경우 -1
         }
-        if (dto.getPics().stream().anyMatch(pics -> pics == null || pics.isBlank())) {
-            // stream : 리스트나 배열을 스트림으로 변환 (사진의 주소값)
-            // anymatch 특정 조건을 만족하는 요소가 하나라도 있으면 true 반환하고 실행 X
-            // pics -> pics 람다 표현식,변수명상관x, 문자열을 pic 으로 받아들임, null값이거나 빈문자열 확인
-            return new ResVo(Const.DIARY_PICS_MISSING); // pics의 배열 안 값 중에 null이거나 빈 문자열이 있는 경우 -2
+        int insDiaryResult = mapper.insDiary(dto);
+        if (dto.getPics() == null){
+            return new ResVo(dto.getDiaryId());
         }
-
-        int result = mapper.insDiary(dto);
-        if (result == 1){ // 제대로 작성이 완료 했으면 사진넣는 작업
-            List<String> pics = dto.getPics(); //다이어리 작성에 사용할 사진 가져와서
-
-            if (pics != null && !pics.isEmpty()) { //pics 첨부할 사진이 존재하는지 확인,pics 하나 이상 있으면 참
-                DiaryInsPicProcDto picDto = new DiaryInsPicProcDto(); // 사진정보
-                picDto.setDiaryId(dto.getDiary_id()); //식별자 설정
-                picDto.setPics(pics); // 사진 설정
-                int picInsResult = mapper.insDiaryPic(picDto); //사진정보 전달
+        List<String> picsList = new ArrayList<>();
+        for (String pic : dto.getPics()) {
+            if (pic != null && !pic.isBlank()) {
+                picsList.add(pic);
             }
         }
-        return new ResVo(dto.getDiary_id()); // 성공시 diary pk값
+        dto.setPics(picsList);
+        if (!picsList.isEmpty()) {
+            int insPicsResult = mapper.insDiaryPic(dto);
+        }
+        return new ResVo(dto.getDiaryId());
     }
 
     // 다이어리 삭제
     public ResVo delDiary(DiaryDelDto dto) {
-        int result = mapper.delDiaryPic(dto); // 사진 삭제
+        int result = mapper.delDiaryPics(dto); // 사진 삭제
         int result2 = mapper.delDiary(dto); // 다이어리 삭제
         return new ResVo(result2); // 0,1 표시
     }
@@ -51,20 +48,28 @@ public class DiaryService {
         if (dto.getTitle() == null || dto.getTitle().isBlank()) {
             return new ResVo(Const.DIARY_TITLE_MISSING); // 제목 null 값이거나 제목 빈 문자열 일 경우 -1
         }
-        int result = mapper.updDiary(dto);
-        if (result == 1) { //수정 성공시
-            int result2 = mapper.delDiaryPic(dto); // 사진 삭제
-            List<String> pics = dto.getPics(); //사진 가져오기
-
-            if (pics != null && !pics.isEmpty()) { //pics 첨부할 사진이 존재하는지 확인,pics 하나 이상 있으면 참
-                DiaryInsPicProcDto picDto = new DiaryInsPicProcDto(); // 사진정보 확인
-                picDto.setDiaryId(dto.getDiaryId()); //식별자 설정
-                picDto.setPics(dto.getPics()); // 사진 설정
-                int picInsResult = mapper.insDiaryPic(picDto); //사진정보 전달
-
+        int updDiaryResult = mapper.updDiary(dto);
+        if (updDiaryResult == 0) {
+            return new ResVo(Const.FAIL);   //다이어리 수정 안되면 0 리턴
+        }
+        int delPicsResult = mapper.delDiaryPics(DiaryDelDto.builder()   //사진 삭제 처리
+                .diaryId(dto.getDiaryId())
+                .loginedUserId(dto.getLoginedUserId())
+                .build());
+        List<String> picsList = new ArrayList<>();
+        for (String pic : dto.getPics()) {
+            if (pic != null && !pic.isBlank()) {    //받은 사진 데이터가 null or 빈 문자열인지 체크
+                picsList.add(pic);                  //저장할 사진 데이터 분류
             }
         }
-        return new ResVo(result); // 성공 1 실패 0
+        dto.setPics(picsList);  //분류된 사진 데이터 세팅
+        if (!picsList.isEmpty()) {     //등록할 사진 없는지 체크
+            int insPicsResult = mapper.insDiaryPic(DiaryInsDto.builder()    //사진 등록
+                    .diaryId(dto.getDiaryId())
+                    .pics(dto.getPics())
+                    .build());
+        }
+        return new ResVo(Const.SUCCESS);
     }
 
     // 다이어리 전체 조회 (10개씩 페이징 처리)

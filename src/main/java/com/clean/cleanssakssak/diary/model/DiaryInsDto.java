@@ -12,7 +12,7 @@ import java.util.List;
 @Schema(title = "다이어리 작성 시 필요한 데이터")
 public class DiaryInsDto {
     @JsonIgnore
-    private int diary_id;
+    private int diaryId;
     @Schema(title = "로그인 한 유저 pk")
     private int loginedUserId;
     @Schema(title = "다이어리 제목")
