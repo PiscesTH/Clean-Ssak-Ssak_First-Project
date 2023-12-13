@@ -25,7 +25,10 @@ public class UserService {
             return new ResVo(Const.PASSWORD_NULL);
         }
 
-        dto.setUpw(BCrypt.hashpw(dto.getUpw(),BCrypt.gensalt()));// 비밀번호 암호화
+        if(dto.getUid().isBlank() || dto.getNickname().isBlank()|| dto.getUpw().isBlank()){//ID와 NickName 공란
+            return new ResVo(Const.ID_NICKNAME_PW_NULL);
+        }
+
         int idCheck = mapper.selIdComparison(dto.getUid());//ID 중복 체크
         Integer nmCheck = mapper.selUserByNickname(dto.getNickname());
 
@@ -37,10 +40,7 @@ public class UserService {
             return new ResVo(Const.NICKNAME_DUPLICATED);
         }
 
-        if(dto.getUid().isBlank() || dto.getNickname().isBlank()|| dto.getUpw().isBlank()){//ID와 NickName 공란
-            return new ResVo(Const.ID_NICKNAME_NULL);
-        }
-
+        dto.setUpw(BCrypt.hashpw(dto.getUpw(),BCrypt.gensalt()));// 비밀번호 암호화
         int result = mapper.insUserSignup(dto);
         // ID가 중복되지 않으니 요청 값으로 INSERT(회원가입) 진행
 
