@@ -51,7 +51,7 @@
         FROM t_diary A
         LEFT JOIN t_user C
         ON A.user_id = C.user_id
-        WHERE A.user_id = #{loginedUserId}
+        WHERE A.user_id = #{loginedUserId} AND A.is_del = 0
         ORDER BY A.diary_id DESC
         LIMIT #{startIdx},#{rowCount}
     </select>
