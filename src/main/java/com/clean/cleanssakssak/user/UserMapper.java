@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
 
-    int selIdComparison (String uid);// ID 중복 확인용
+    int selIdComparison(String uid);// ID 중복 확인용
 
     int insUserSignup(UserInsSignupDto dto);// 회원가입 정보 INSERT
 
