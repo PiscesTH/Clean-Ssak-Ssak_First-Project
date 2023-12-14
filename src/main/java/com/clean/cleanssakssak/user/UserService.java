@@ -23,11 +23,11 @@ public class UserService {
 
         if(dto.getUpw() == null || dto.getUpw().isBlank()){//upw가 null 혹은 빈 문자열로 들어왔을 때 회원가입 실패 응답값
             return new ResVo(Const.PASSWORD_NULL);
-        }
-
-        if(dto.getUid() == null || dto.getNickname() == null ||
+        }else if(dto.getUid() == null || dto.getNickname() == null ||
                 dto.getUid().isBlank() || dto.getNickname().isBlank()){//ID와 NickName 공란
             return new ResVo(Const.ID_NICKNAME_NULL);
+        }else if(dto.getUid().contains(" ") || dto.getUpw().contains(" ")){
+            return new ResVo(Const.ID_PW_BLANK);
         }
 
         int idCheck = mapper.selIdComparison(dto.getUid());//ID 중복 체크
