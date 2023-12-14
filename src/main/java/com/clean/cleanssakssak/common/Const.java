@@ -14,7 +14,7 @@ public class Const {// 주로 사용되는 응답값 상수 정의
 
     public static final int ID_DUPLICATED = -1; // usersignup ID가 중복됨
     public static final int NICKNAME_DUPLICATED = 0; // usersignup 닉네임이 중복됨
-    public static final int ID_NICKNAME_NULL = -2; // usersignup ID와 닉네임, 패스워드 데이터가 공란
+    public static final int ID_NICKNAME_NULL = -2; // usersignup ID와 닉네임이 공란
     public static final int PASSWORD_NULL = -3; // usersignup upw가 공란이거나 데이터가 없음
     public static final int ID_PW_BLANK = -4; // usersignup ID, PW 중에 또는 둘 다 문자 사이 공란이 있다
     public static final int ID_FAIL = 2; // usersignin ID가 다르다
