@@ -57,7 +57,8 @@ public class UserController {
     //---------------------------------- 유저 정보 수정 ---------------------------------------
     @Operation(summary = "유저의 비밀번호/닉네임 변경 처리", description = """
             result = 0 : 변경 실패<br>
-            result > 0 : 변경 성공
+            result > 0 : 변경 성공<br>
+            result = -4 : 비밀번호에 공백 포함
             """)
     @PatchMapping("/profile")
     public ResVo patchProfile(@RequestBody UserUbdDto dto){

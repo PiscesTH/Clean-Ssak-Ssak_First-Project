@@ -72,9 +72,10 @@ public class UserService {
 
     //유저 회원정보(비밀번호, 닉네임) 변경 처리
     public ResVo patchProfile(UserUbdDto dto){
-
+        if (dto.getUpw() != null && dto.getUpw().contains(" ")) {
+            return new ResVo(Const.ID_PW_BLANK);
+        }
         int updResult = 0;
-
         if (dto.getUpw() != null && !dto.getUpw().isBlank()){   //수정할 비밀번호 데이터가 null이거나 공백만 있는 경우 확인
             String hashedUpw = BCrypt.hashpw(dto.getUpw(),BCrypt.gensalt());    //비밀번호 암호화
             dto.setUpw(hashedUpw);
