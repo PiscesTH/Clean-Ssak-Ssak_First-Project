@@ -26,7 +26,7 @@ public class UserService {
         }else if(dto.getUid() == null || dto.getNickname() == null ||
                 dto.getUid().isBlank() || dto.getNickname().isBlank()){//ID와 NickName 공란
             return new ResVo(Const.ID_NICKNAME_NULL);
-        }else if(dto.getUid().contains(" ") || dto.getUpw().contains(" ")){
+        }else if(dto.getUid().contains(" ") || dto.getUpw().contains(" ")){//ID와 PW 사이에 공백
             return new ResVo(Const.ID_PW_BLANK);
         }
 
