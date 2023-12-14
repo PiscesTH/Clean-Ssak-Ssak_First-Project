@@ -10,7 +10,7 @@ public interface UserMapper {
 
     int insUserSignup(UserInsSignupDto dto);// 회원가입 정보 INSERT
 
-    Integer selUserByNickname(String nickname);// 유저 회원가입/ 정보 수정 시 nickname 중복 체크
+    Integer selUserByNickname(String nickname);// 유저 회원가입 정보 수정 시 nickname 중복 체크
 
     String selSigninPw(UserSigninDto dto);// 로그인 성공 유/무를 위한 upw SELECT
 
