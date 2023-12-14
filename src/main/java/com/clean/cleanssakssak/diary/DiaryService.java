@@ -20,6 +20,10 @@ public class DiaryService {
             return new ResVo(Const.DIARY_TITLE_MISSING); // 제목 null 값이거나 제목 빈 문자열 일 경우 -1
         }
         int insDiaryResult = mapper.insDiary(dto);
+
+        if(insDiaryResult == 0){//다이어리 insert 실패 시
+            return new ResVo(Const.FAIL);
+        }
         if (dto.getPics() == null){     //받아온 사진 리스트 데이터가 null인지 체크
             return new ResVo(dto.getDiaryId());
         }
@@ -65,7 +69,7 @@ public class DiaryService {
             }
         }
         dto.setPics(picsList);  //분류된 사진 데이터 세팅
-        if (!picsList.isEmpty()) {     //등록할 사진 있는지 체크
+        if (!picsList.isEmpty()) {//등록할 사진 있는지 체크
             int insPicsResult = mapper.insDiaryPic(DiaryInsDto.builder()    //사진 등록
                     .diaryId(dto.getDiaryId())
                     .pics(dto.getPics())

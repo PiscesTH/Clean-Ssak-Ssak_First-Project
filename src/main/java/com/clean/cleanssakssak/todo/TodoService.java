@@ -19,10 +19,10 @@ public class TodoService {
     public ResVo postTodo(TodoInsDto dto){
 
         if (dto.getCleaning() == null || dto.getCleaning().isBlank()){  //cleaning 데이터가 null 이거나 공백만 있는 경우 체크
-            return new ResVo(Const.FAIL);
+            return new ResVo(Const.NULL);
         }
         if (dto.getDoDay() == null || dto.getDoDay().isBlank()){    //do_day 데이터가 null 이거나 공백만 있는 경우 체크
-            return new ResVo(Const.FAIL);
+            return new ResVo(Const.NULL);
         }
 
         String[] tmp = dto.getDoDay().split("/");   //입력받은 날짜 데이터 원하는 형식으로 변경
@@ -33,6 +33,10 @@ public class TodoService {
         dto.setDoDay(date);     //원하는 데이터 형식으로 변경한 날짜 세팅
 
         int insResult = mapper.insTodo(dto);
+
+        if(insResult == 0){
+            return new ResVo(Const.FAIL);
+        }
 
         return new ResVo(dto.getTodoId());  //등록한 todo pk값 리턴
 
@@ -51,9 +55,13 @@ public class TodoService {
     // todo 내용 수정
     public ResVo patchTodo(TodoUpdDto dto){
 
+        if(dto.getDoDay() == null ){// null 체크
+            return new ResVo(Const.NULL);
+        }
+
         String cleaning = dto.getCleaning();
         if(cleaning == null || cleaning.isBlank()) {//빈문자열 체크
-            return new ResVo(Const.FAIL);
+            return new ResVo(Const.NULL);
         }
 
         String[] dayArr= dto.getDoDay().split("/");     //입력받은 날짜 데이터 원하는 형식으로 변경

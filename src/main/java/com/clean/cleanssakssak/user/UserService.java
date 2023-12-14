@@ -53,6 +53,12 @@ public class UserService {
     public UserSigninVo postSignin(UserSigninDto dto){
 
         UserSigninVo vo = new UserSigninVo();
+
+        if(dto.getUid() == null || dto.getUpw() == null){
+            vo.setResult(Const.NULL);
+            return vo;
+        }
+
         String password = mapper.selSigninPw(dto);// 받아온 유저의 uid값을 이용해 해당 upw를 SELECT
 
         if(password == null){//SELECT 하지 못한 것 = 해당 uid가 없다
