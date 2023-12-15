@@ -94,7 +94,7 @@ public class UserService {
 
         Integer nicknameCheck = mapper.selUserByNickname(dto.getNickname());//닉네임 중복 체크용
 
-        if (nicknameCheck == null && dto.getNickname() != null && !dto.getNickname().isBlank()){
+        if (nicknameCheck == null && !dto.getNickname().isBlank()){
             //닉네임 중복이 없고 수정할 닉네임 데이터가 제대로 들어온 경우
             updResult += mapper.updUserNickname(dto);//닉네임 수정
         }
