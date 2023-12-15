@@ -95,7 +95,8 @@ public class UserService {
             updResult += mapper.updUserNickname(dto);//닉네임 수정
         }
 
-        return new ResVo(updResult);// result = 0 : 수정 실패 / result > 0 : 수정 성공
+        return new ResVo(updResult);
+        // result = 0 : 수정 실패 / result = 1 : ( 수정 한 개만 시도 시 ) 수정 성공 /result = 2 : ( 수정 두 개 시도 시 )변경 성공
     }
 
     //유저 회원탈퇴 처리
