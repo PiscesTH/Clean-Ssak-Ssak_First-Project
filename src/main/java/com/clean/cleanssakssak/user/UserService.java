@@ -78,23 +78,24 @@ public class UserService {
 
     //유저 회원정보(비밀번호, 닉네임) 변경 처리
     public ResVo patchProfile(UserUbdDto dto){
-        if (dto.getUpw() != null && dto.getUpw().contains(" ")) {
+        if (dto.getUpw() != null && dto.getUpw().contains(" ")) {//수정할 비밀번호 데이터에 공백이 포함되어 있다
             return new ResVo(Const.ID_PW_BLANK);
         }
         int updResult = 0;
-        if (dto.getUpw() != null && !dto.getUpw().isBlank()){   //수정할 비밀번호 데이터가 null이거나 공백만 있는 경우 확인
-            String hashedUpw = BCrypt.hashpw(dto.getUpw(),BCrypt.gensalt());    //비밀번호 암호화
+        if (dto.getUpw() != null && !dto.getUpw().isBlank()){//수정할 비밀번호 데이터가 제대로 들어온 경우
+            String hashedUpw = BCrypt.hashpw(dto.getUpw(),BCrypt.gensalt());//비밀번호 암호화
             dto.setUpw(hashedUpw);
-            updResult += mapper.updUserUpw(dto);    //비밀번호 수정
+            updResult += mapper.updUserUpw(dto);//비밀번호 수정
         }
 
-        Integer nicknameCheck = mapper.selUserByNickname(dto.getNickname());    //닉네임 중복 체크용
+        Integer nicknameCheck = mapper.selUserByNickname(dto.getNickname());//닉네임 중복 체크용
 
-        if (nicknameCheck == null && dto.getNickname() != null && !dto.getNickname().isBlank()){    //닉네임 중복이 없고 수정할 닉네임 데이터가 null이거나 공백만 있는 경우 확인
-            updResult += mapper.updUserNickname(dto);   //닉네임 수정
+        if (nicknameCheck == null && dto.getNickname() != null && !dto.getNickname().isBlank()){
+            //닉네임 중복이 없고 수정할 닉네임 데이터가 제대로 들어온 경우
+            updResult += mapper.updUserNickname(dto);//닉네임 수정
         }
 
-        return new ResVo(updResult);    // result = 0 : 수정 실패 / result > 0 : 수정 성공
+        return new ResVo(updResult);// result = 0 : 수정 실패 / result > 0 : 수정 성공
     }
 
     //유저 회원탈퇴 처리
