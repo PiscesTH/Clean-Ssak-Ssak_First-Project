@@ -31,7 +31,7 @@ public class UserService {
         }
 
         int idCheck = mapper.selIdComparison(dto.getUid());//ID 중복 체크
-        Integer nmCheck = mapper.selUserByNickname(dto.getNickname());
+        Integer nmCheck = mapper.selUserByNickname(dto.getNickname());// 닉네임 중복 체크
 
         if(idCheck == 1){//ID 중복으로 회원가입 실패 시 응답값
             return new ResVo(Const.ID_DUPLICATED);
@@ -43,7 +43,7 @@ public class UserService {
 
         dto.setUpw(BCrypt.hashpw(dto.getUpw(),BCrypt.gensalt()));// 비밀번호 암호화
         int result = mapper.insUserSignup(dto);
-        // ID가 중복되지 않으니 요청 값으로 INSERT(회원가입) 진행
+        // ID와 닉네임이 중복되지 않으니 요청 값으로 INSERT(회원가입) 진행
 
         return new ResVo(dto.getUserId());
         //위의 IF문에 해당되지 않는다면 INSERT 성공으로 해당 user_id값 리턴
@@ -59,12 +59,12 @@ public class UserService {
             return vo;
         }
 
-        String password = mapper.selSigninPw(dto);// 받아온 유저의 uid값을 이용해 해당 upw를 SELECT
+        String hashedPassword = mapper.selSigninPw(dto);// 받아온 유저의 uid값을 이용해 해당 upw를 SELECT
 
-        if(password == null){//SELECT 하지 못한 것 = 해당 uid가 없다
+        if(hashedPassword == null){//SELECT 하지 못한 것 = 해당 uid가 없다
             vo.setResult(Const.ID_FAIL);
             return vo;
-        }else if(BCrypt.checkpw(dto.getUpw(), password)){
+        }else if(BCrypt.checkpw(dto.getUpw(), hashedPassword)){
             //upw를 SELECT 했다면 암호화 된 password가 고객이 입력한 dto.getUpw와 같은지 체크
             vo = mapper.selSigninInfo(dto);//true라면 로그인 성공 해당 유저의 정보를 SELECT
             vo.setResult(Const.SUCCESS);
