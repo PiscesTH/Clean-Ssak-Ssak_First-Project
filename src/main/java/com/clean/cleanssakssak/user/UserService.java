@@ -21,12 +21,12 @@ public class UserService {
     // 회원가입 메소드
     public ResVo postSignup(UserInsSignupDto dto){
 
-        if(dto.getUpw() == null || dto.getUpw().isBlank()){//upw가 null 혹은 빈 문자열로 들어왔을 때 회원가입 실패 응답값
-            return new ResVo(Const.PASSWORD_NULL);
-        }else if(dto.getUid() == null || dto.getNickname() == null ||
-                dto.getUid().isBlank() || dto.getNickname().isBlank()){//ID와 NickName 공란
-            return new ResVo(Const.ID_NICKNAME_NULL);
-        }else if(dto.getUid().contains(" ") || dto.getUpw().contains(" ")){//ID와 PW 사이에 공백
+       if(dto.getUid() == null || dto.getNickname() == null ||
+                dto.getUid().isBlank() || dto.getNickname().isBlank() ||
+               dto.getUpw() == null || dto.getUpw().isBlank()){//ID와 NickName, password 공란 또는 null만 들어옴
+            return new ResVo(Const.ID_NICKNAME_PW_NULL);
+        }else if(dto.getUid().contains(" ") || dto.getUpw().contains(" ")
+                ){//ID와 PW 사이에 공백이 포함됨 들어옴
             return new ResVo(Const.ID_PW_BLANK);
         }
 
@@ -55,7 +55,7 @@ public class UserService {
         UserSigninVo vo = new UserSigninVo();
 
         if(dto.getUid() == null || dto.getUpw() == null){
-            vo.setResult(Const.NULL);
+            vo.setResult(Const.ID_NICKNAME_PW_NULL);
             return vo;
         }
 

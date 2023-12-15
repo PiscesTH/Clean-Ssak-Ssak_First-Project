@@ -14,9 +14,8 @@ public class Const {// 주로 사용되는 응답값 상수 정의
 
     public static final int ID_DUPLICATED = -1; // usersignup ID가 중복됨
     public static final int NICKNAME_DUPLICATED = 0; // usersignup 닉네임이 중복됨
-    public static final int ID_NICKNAME_NULL = -2; // usersignup ID와 닉네임이 공란
-    public static final int PASSWORD_NULL = -3; // usersignup upw가 공란이거나 데이터가 없음
-    public static final int ID_PW_BLANK = -4; // usersignup ID, PW 중에 또는 둘 다 문자 사이 공란이 있다
+    public static final int ID_NICKNAME_PW_NULL = -2; // usersignup ID와 닉네임, 패스워드가 공란 또는 null
+    public static final int ID_PW_BLANK = -3; // usersignup ID, PW 중에 또는 둘 다 문자 사이 공란이 있다
     public static final int ID_FAIL = 2; // usersignin ID가 다르다
     public static final int PW_FAIL = 3; // usersignin PW가 다르다
 
@@ -25,5 +24,5 @@ public class Const {// 주로 사용되는 응답값 상수 정의
     public static final int CANCEL = 2; // check 취소 성공 값
     public static final int IS_DEL = 1;// todo 삭제 시 쓰일 값
 
-    public static final int NULL = -5; // 받아와야 하는 값이 null이라서 실행 불가
+    public static final int NULL = -4; // 받아와야 하는 값이 null이라서 실행 불가
 }

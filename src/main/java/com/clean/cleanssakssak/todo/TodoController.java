@@ -21,7 +21,10 @@ public class TodoController {
     private final TodoService service;
 
     //---------------------------------------todo 등록-------------------------------------------
-    @Operation(summary = "청소 할 일 등록", description = "등록 성공 : todo_id 값 리턴<br> 등록 실패 : 0 ")
+    @Operation(summary = "청소 할 일 등록", description = """
+            등록 성공 : todo_id 값 리턴<br> 
+            등록 실패 : 0 <br> 
+            들어온 값이 null 또는 빈문자열 : -4""")
     @PostMapping
     public ResVo postTodo(@RequestBody TodoInsDto dto) {
         return service.postTodo(dto);
@@ -35,7 +38,11 @@ public class TodoController {
     }
 
     //---------------------------------------todo 수정-------------------------------------------
-    @Operation(summary = "todo 일정 수정" ,description = "일정 내용 수정<br>0: 수정 실패 <br>1: 수정 성공")
+    @Operation(summary = "todo 일정 수정" ,description = """
+            일정 내용 수정<br>
+            수정 성공 : 1<br>
+            수정 실패 : 0<br>
+            들어온 값이 null 또는 빈 문자열이라 실패 : -4""")
     @Parameters(value = {
             @Parameter(name = "userId", description = "todo를 수정하고 싶은 유저의 PK"),
             @Parameter(name = "todoId", description = "해당 todo의 PK"),
@@ -59,7 +66,11 @@ public class TodoController {
     }
 
     //---------------------------------------todo 체크 처리-------------------------------------------
-    @Operation(summary = "todo 체크 기능", description = "todo 체크 누르기/취소<br>0: 수정 실패, <br>1: 수정 성공")
+    @Operation(summary = "todo 체크 기능", description = """
+    todo 체크 누르기/취소<br>
+    체크 수정 실패 : 0<br>
+    체크 성공 : 1<br>
+    체크 해제 성공 : 2""")
     @Parameters(value = {
             @Parameter(name = "userId", description = "todo를 삭제하고 싶은 유저의 PK"),
             @Parameter(name = "todoId", description = "해당 todo의 PK")

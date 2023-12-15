@@ -22,7 +22,10 @@ public class DiaryController {
     private final DiaryService service;
 
     //------------------------------- 다이어리 작성 -------------------------------
-    @Operation(summary = "다이어리 작성",description = "작성 완료 : diary pk(값), <br>작성 실패 :result(0), <br>제목 null 값 혹은 빈 문자열 :result(-1)")
+    @Operation(summary = "다이어리 작성",description = """
+    작성 완료 : diary pk(값)<br>
+    작성 실패 : 0 <br>
+    제목 null 값 혹은 빈 문자열 :-1""")
     @Parameters(value = {
             @Parameter(name = "contents", description = "내용")
             ,@Parameter(name = "title", description = "제목")
@@ -35,7 +38,7 @@ public class DiaryController {
     }
 
     //------------------------------- 다이어리 삭제 -------------------------------
-    @Operation(summary = "다이어리 삭제",description = "삭제 완료 :result(1), <br>삭제 실패 :result(0)")
+    @Operation(summary = "다이어리 삭제",description = "삭제 완료 : 1 <br>삭제 실패 : 0 ")
     @Parameters(value = {
             @Parameter(name = "user_id", description = "유저")
             ,@Parameter(name = "diary_id", description = "다이어리 번호")
@@ -46,7 +49,10 @@ public class DiaryController {
     }
 
     //------------------------------- 다이어리 수정 -------------------------------
-    @Operation(summary = "다이어리 수정",description = "수정 완료 :result(1), <br>수정 실패 :result(0),<br>제목 null 값 혹은 빈 문자열 :result(-1)")
+    @Operation(summary = "다이어리 수정",description = """
+    수정 완료 : 1<br>
+    수정 실패 : 0<br>
+    제목 null 값 혹은 빈 문자열 : -1""")
     @Parameters(value = {
             @Parameter(name = "contents", description = "내용")
             ,@Parameter(name = "title", description = "제목")

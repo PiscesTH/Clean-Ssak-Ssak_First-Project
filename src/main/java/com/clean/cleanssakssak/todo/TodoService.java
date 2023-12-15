@@ -18,10 +18,8 @@ public class TodoService {
     //청소 todo 하나 등록
     public ResVo postTodo(TodoInsDto dto){
 
-        if (dto.getCleaning() == null || dto.getCleaning().isBlank()){  //cleaning 데이터가 null 이거나 공백만 있는 경우 체크
-            return new ResVo(Const.NULL);
-        }
-        if (dto.getDoDay() == null || dto.getDoDay().isBlank()){    //do_day 데이터가 null 이거나 공백만 있는 경우 체크
+        if (dto.getCleaning() == null || dto.getCleaning().isBlank()
+        ||dto.getDoDay() == null || dto.getDoDay().isBlank()){  //cleaning, do_day 데이터가 null 이거나 공백만 있는 경우 체크
             return new ResVo(Const.NULL);
         }
 
