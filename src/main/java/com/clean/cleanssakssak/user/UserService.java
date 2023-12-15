@@ -88,6 +88,10 @@ public class UserService {
             updResult += mapper.updUserUpw(dto);//비밀번호 수정
         }
 
+        if(dto.getNickname() == null){
+            return new ResVo(updResult);
+        }
+
         Integer nicknameCheck = mapper.selUserByNickname(dto.getNickname());//닉네임 중복 체크용
 
         if (nicknameCheck == null && dto.getNickname() != null && !dto.getNickname().isBlank()){
