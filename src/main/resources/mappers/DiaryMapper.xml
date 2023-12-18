@@ -61,5 +61,17 @@
         FROM t_diary_pic
         WHERE diary_id = #{diaryId}
     </select>
+    
+    <delete id="delDiaryPicForUnregister">
+        DELETE B
+        FROM t_diary A
+        JOIN t_diary_pic B
+        ON A.diary_id = B.diary_id
+        WHERE A.user_id = #{loginedUserId}
+    </delete>
 
+    <delete id="delDiaryForUnregister">
+        DELETE FROM t_diary
+        WHERE user_id = #{loginedUserId}
+    </delete>
 </mapper>

@@ -21,5 +21,7 @@ public interface DiaryMapper {
     List<DiarySelVo> selDiaryAll(DiarySelDto dto); // 다이어리 전체 조회
     List<String> selDiaryPicAll (int diaryId); //다이어리 전체 사진 조회
 
+    int delDiaryPicForUnregister(int loginedUserId);
+    int delDiaryForUnregister(int loginedUserId);
 }
 

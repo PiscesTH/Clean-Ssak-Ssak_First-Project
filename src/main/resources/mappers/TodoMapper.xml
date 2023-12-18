@@ -45,4 +45,8 @@
         WHERE todo_id = #{todoId} AND user_id = #{loginedUserId}
     </update>
 
+    <delete id="delTodoForUnregister">
+        DELETE FROM t_todo
+        WHERE user_id = #{loginedUserId}
+    </delete>
 </mapper>
