@@ -62,15 +62,15 @@ public class TodoService {
             return new ResVo(Const.NULL);
         }
 
-        String[] dayArr= dto.getDoDay().split("/");     //입력받은 날짜 데이터 원하는 형식으로 변경
+        String[] dayArr= dto.getDoDay().split("/");//입력받은 날짜 데이터 원하는 형식으로 변경
         List<String> dayList = new ArrayList<>(Arrays.asList(dayArr));
 
         dayList.add(0, dayList.get(dayList.size()-1));
         dayList.remove(dayList.size()-1);
 
         String day = String.join("-",dayList);
-
         dto.setDoDay(day);      //원하는 데이터 형식으로 변경한 날짜 세팅
+
         int result = mapper.upTodo(dto);
 
         return new ResVo(result);

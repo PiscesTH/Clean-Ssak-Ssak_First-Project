@@ -21,5 +21,5 @@ public interface TodoMapper {
 
     int upCheck(TodoToggleCheckDto dto);//todo check toggle 처리
 
-    int delTodoForUnregister(int loginedUserId);
+    int delTodoForUnregister(int loginedUserId);// todo 유저 탈퇴 시 해당 유저의 todo 전체 삭제
 }
