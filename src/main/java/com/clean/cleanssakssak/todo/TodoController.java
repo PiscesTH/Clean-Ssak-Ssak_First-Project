@@ -21,7 +21,7 @@ public class TodoController {
     private final TodoService service;
 
     //---------------------------------------todo 등록-------------------------------------------
-    @Operation(summary = "청소 할 일 등록", description = """
+    @Operation(summary = "todo 일정 등록", description = """
             등록 성공 : todo_id 값 리턴<br> 
             등록 실패 : 0 <br> 
             들어온 값이 null 또는 빈문자열 : -4""")
@@ -31,7 +31,7 @@ public class TodoController {
     }
 
     //---------------------------------------todo 조회-------------------------------------------
-    @Operation(summary = "청소 할 일 목록 불러오기", description = "8개씩 페이징 처리")
+    @Operation(summary = "todo 일정 목록 불러오기", description = "8개씩 페이징 처리")
     @GetMapping
     public List<TodoSelAllVo> getTodoAll(TodoSelAllDto dto) {
         return service.getTodoAll(dto);
