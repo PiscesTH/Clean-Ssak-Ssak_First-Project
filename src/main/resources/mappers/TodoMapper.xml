@@ -17,6 +17,7 @@
         FROM t_todo
         WHERE user_id = #{loginedUserId}
         AND is_del = 0
+        AND do_day >= CURDATE()
         ORDER BY do_day, todo_id DESC
         LIMIT #{startIdx}, #{rowCount}
     </select>
