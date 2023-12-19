@@ -49,7 +49,7 @@
         ,A.user_id as loginedUserId, A.title, A.contents
         ,A.created_at as createdAt,A.diary_id as diaryId
         FROM t_diary A
-        LEFT JOIN t_user C
+        INNER JOIN t_user C
         ON A.user_id = C.user_id
         WHERE A.user_id = #{loginedUserId} AND A.is_del = 0
         ORDER BY A.diary_id DESC
