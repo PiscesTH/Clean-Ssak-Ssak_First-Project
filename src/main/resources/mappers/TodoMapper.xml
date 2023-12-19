@@ -19,7 +19,7 @@
         WHERE user_id = #{loginedUserId}
         AND is_del = 0
         AND do_day >= CURDATE()
-        ORDER BY do_day, todo_id DESC
+        ORDER BY do_day
         LIMIT #{startIdx}, #{rowCount}
         ]]>
     </select>

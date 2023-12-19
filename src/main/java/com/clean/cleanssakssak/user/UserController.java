@@ -33,7 +33,7 @@ public class UserController {
     @Parameters(value = {
             @Parameter(name = "uid", description = "아이디"),
             @Parameter(name = "upw", description = "비밀번호"),
-            @Parameter(name = "nickName", description = "별명 / 성함")
+            @Parameter(name = "nickname", description = "별명 / 성함")
     })
     @PostMapping("/signup")
     public ResVo postSignup(@RequestBody UserInsSignupDto dto){

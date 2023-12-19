@@ -60,7 +60,7 @@ public class DiaryController {
             ,@Parameter(name = "diary_id", description = "다이어리 번호")
     })
     @PatchMapping
-    public ResVo patchDiary (DiaryUpdDto dto) {
+    public ResVo patchDiary (@RequestBody DiaryUpdDto dto) {
         return service.patchDiary(dto);
     }
 
