@@ -12,6 +12,7 @@
     </insert>
 
     <select id="selTodoAll">
+        <![CDATA[
         SELECT todo_id AS todoId, cleaning,
         do_day AS doDay, is_checked AS isChecked
         FROM t_todo
@@ -20,6 +21,7 @@
         AND do_day >= CURDATE()
         ORDER BY do_day, todo_id DESC
         LIMIT #{startIdx}, #{rowCount}
+        ]]>
     </select>
 
     <update id="updTodo">
