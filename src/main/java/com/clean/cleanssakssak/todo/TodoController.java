@@ -76,7 +76,7 @@ public class TodoController {
             @Parameter(name = "todoId", description = "해당 todo의 PK")
     })
     @PostMapping("/check")
-    public ResVo toggleCheck(@RequestBody TodoToggleCheckDto dto){
+    public ResVo toggleCheck(TodoToggleCheckDto dto){
         return service.toggleCheck(dto);
     }
 
