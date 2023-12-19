@@ -71,7 +71,7 @@ public class TodoService {
         String day = String.join("-",dayList);
         dto.setDoDay(day);      //원하는 데이터 형식으로 변경한 날짜 세팅
 
-        int result = mapper.upTodo(dto);
+        int result = mapper.updTodo(dto);
 
         return new ResVo(result);
     }
