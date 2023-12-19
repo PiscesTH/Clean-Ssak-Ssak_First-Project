@@ -87,7 +87,6 @@ public class TodoService {
     // todo check 처리
     public ResVo toggleCheck(TodoToggleCheckDto dto){
         int result = mapper.selCheck(dto);
-
         if(result == 1){// 이미 check가 되어있는경우
             dto.setCheck(Const.CHECK_OFF);
             mapper.upCheck(dto);//체크 취소 update
@@ -97,7 +96,6 @@ public class TodoService {
             mapper.upCheck(dto);
             return new ResVo(Const.SUCCESS);
         }
-
         return new ResVo(Const.FAIL);//select 실패 시
     }
 }
