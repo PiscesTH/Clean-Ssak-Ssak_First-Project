@@ -27,10 +27,15 @@ public class DiaryService {
         if (dto.getPics() == null) {     //받아온 사진 리스트 데이터가 null인지 체크
             return new ResVo(dto.getDiaryId());
         }
+        List<String> picsList = new ArrayList<>();
         for (String pic : dto.getPics()) {
-            if (pic != null && !pic.isBlank()) { //유효한 사진인지 체크
-                int insPicsResult = mapper.insDiaryPic(dto);    //사진 등록
+            if (pic != null && !pic.isBlank()) {    //받은 사진 데이터가 null or 빈 문자열인지 체크
+                picsList.add(pic);                  //저장할 사진 데이터 분류
             }
+        }
+        dto.setPics(picsList);  //분류한 사진 데이터 세팅
+        if (!picsList.isEmpty()) {  //등록할 사진 있는지 체크
+            int insPicsResult = mapper.insDiaryPic(dto);
         }
         return new ResVo(dto.getDiaryId());
     }
@@ -57,13 +62,19 @@ public class DiaryService {
         if (dto.getPics() == null) {      //받아온 사진 리스트 데이터가 null인지 체크
             return new ResVo(Const.SUCCESS);
         }
+        List<String> picsList = new ArrayList<>();
+
         for (String pic : dto.getPics()) {
-            if (pic != null && !pic.isBlank()) {    //유효한 사진인지 체크
-                int insPicsResult = mapper.insDiaryPic(DiaryInsDto.builder()    //사진 등록
-                        .diaryId(dto.getDiaryId())
-                        .pics(dto.getPics())
-                        .build());
+            if (pic != null && !pic.isBlank()) {    //받은 사진 데이터가 null or 빈 문자열인지 체크
+                picsList.add(pic);                  //저장할 사진 데이터 분류
             }
+        }
+        dto.setPics(picsList);  //분류된 사진 데이터 세팅
+        if (!picsList.isEmpty()) {//등록할 사진 있는지 체크
+            int insPicsResult = mapper.insDiaryPic(DiaryInsDto.builder()    //사진 등록
+                    .diaryId(dto.getDiaryId())
+                    .pics(dto.getPics())
+                    .build());
         }
         return new ResVo(Const.SUCCESS);
     }
