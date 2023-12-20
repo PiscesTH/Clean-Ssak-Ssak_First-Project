@@ -11,6 +11,7 @@ import com.clean.cleanssakssak.user.model.UserSigninVo;
 import com.clean.cleanssakssak.user.model.UserUbdDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
@@ -26,12 +27,26 @@ public class UserService {
     // 회원가입 메소드
     public ResVo postSignup(UserInsSignupDto dto){
 
+/*
        if(dto.getUid() == null || dto.getNickname() == null ||
                 dto.getUid().isBlank() || dto.getNickname().isBlank() ||
                dto.getUpw() == null || dto.getUpw().isBlank()){//ID와 NickName, password 공란 또는 null만 들어옴
             return new ResVo(Const.ID_NICKNAME_PW_NULL);
         }else if(dto.getUid().contains(" ") || dto.getUpw().contains(" ")
                 ){//ID와 PW 사이에 공백이 포함됨 들어옴
+            return new ResVo(Const.ID_PW_BLANK);
+        }
+*/
+        if(!StringUtils.isBlank(dto.getUid())){//ID와 NickName, password 공란 또는 null만 들어옴
+            return new ResVo(Const.ID_NULL);
+        }
+        if(!StringUtils.isBlank(dto.getNickname())){
+            return new ResVo(Const.NICKNAME_NULL);
+        }
+        if(!StringUtils.isBlank(dto.getUpw())){
+            return new ResVo(Const.PW_NULL);
+        }
+        if(dto.getUid().contains(" ") || dto.getUpw().contains(" ")){//ID와 PW 사이에 공백이 포함됨 들어옴
             return new ResVo(Const.ID_PW_BLANK);
         }
 
@@ -60,7 +75,7 @@ public class UserService {
         UserSigninVo vo = new UserSigninVo();
 
         if(dto.getUid() == null || dto.getUpw() == null){
-            vo.setResult(Const.ID_NICKNAME_PW_NULL);
+            vo.setResult(Const.NULL);
             return vo;
         }
 
@@ -69,7 +84,8 @@ public class UserService {
         if(hashedPassword == null){//SELECT 하지 못한 것 = 해당 uid가 없다
             vo.setResult(Const.ID_FAIL);
             return vo;
-        }else if(BCrypt.checkpw(dto.getUpw(), hashedPassword)){
+        }
+        if(BCrypt.checkpw(dto.getUpw(), hashedPassword)){
             //upw를 SELECT 했다면 암호화 된 password가 고객이 입력한 dto.getUpw와 같은지 체크
             vo = userMapper.selSigninInfo(dto);//true라면 로그인 성공 해당 유저의 정보를 SELECT
             vo.setResult(Const.SUCCESS);
