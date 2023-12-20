@@ -9,8 +9,6 @@ import java.util.List;
 @Data
 @Schema(title = "다이어리 전체 조회 시 응답 데이터")
 public class DiarySelVo {
-    @Schema(title = "로그인 한 유저 pk")
-    private int loginedUserId;
     @Schema(title = "다이어리 pk")
     private int diaryId;
     @Schema(title = "로그인 한 유저 닉네임")

@@ -45,15 +45,14 @@
     </update>
 
     <select id="selDiaryAll"> <!-- 다이어리 페이징처리 -->
-        SELECT C.nickname
-        ,A.user_id as loginedUserId, A.title, A.contents
-        ,A.created_at as createdAt,A.diary_id as diaryId
+        SELECT A.diary_id AS diaryId, B.nickname, A.title, A.contents, A.created_at AS createdAt
         FROM t_diary A
-        INNER JOIN t_user C
-        ON A.user_id = C.user_id
-        WHERE A.user_id = #{loginedUserId} AND A.is_del = 0
-        ORDER BY A.diary_id DESC
-        LIMIT #{startIdx},#{rowCount}
+        JOIN t_user B
+        USING (user_id)
+        WHERE user_id = #{loginedUserId}
+        AND is_del = 0
+        ORDER BY diary_id DESC
+        LIMIT #{startIdx}, #{rowCount}
     </select>
 
     <select id="selDiaryPicAll">
