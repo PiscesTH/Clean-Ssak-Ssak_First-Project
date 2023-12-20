@@ -25,8 +25,10 @@ public class UserController {
     //---------------------------------- 유저 회원가입 ---------------------------------------
     @Operation(summary = "회원가입", description = """
             유저 회원가입 시 입력할 정보<br>
-            -3 : ID 또는 비밀번호(또는 둘 다) 중간에 빈 문자열 포함되어있다(실패)<br>
-            -2 : ID, 닉네임, 비밀번호 중 (또는 여러 개) null 혹은 빈 문자열만 들어왔다(실패)<br>
+            -5 : ID 또는 비밀번호(또는 둘 다) 중간에 빈 문자열 포함되어있다(실패)<br>
+            -4 : NICKNAME null 혹은 빈 문자열만 들어왔다(실패)<br>
+            -3 : PW null 혹은 빈 문자열만 들어왔다(실패)<br>
+            -2 : ID null 혹은 빈 문자열만 들어왔다(실패)<br>
             -1 : ID가 중복된다(실패)<br>
             0 : nick_name이 중복된다(실패)<br>
             user_id( PK값 ) : 회원가입 성공""")
@@ -43,7 +45,7 @@ public class UserController {
     //---------------------------------- 유저 로그인 ---------------------------------------
     @Operation(summary = "로그인 인증", description = """
             아이디/ 비밀번호를 활용한 인증처리<br>
-            "1: 성공, 2: 아이디 다름, 3: 비밀번호 다름, -2 : 아이디 또는 비밀번호에 null이 들어옴""")
+            "1: 성공, 2: 아이디 다름, 3: 비밀번호 다름, -4 : 아이디 또는 비밀번호에 null이 들어옴""")
     @Parameters(value = {
             @Parameter(name = "uid", description = "아이디"),
             @Parameter(name = "upw", description = "비밀번호")
@@ -58,7 +60,7 @@ public class UserController {
             result = 0 : 변경 실패<br>
             result = 1 : ( 수정 한 개만 시도 시 )변경 성공<br>
             result = 2 : ( 수정 두 개 시도 시 )변경 성공<br>
-            result = -3 : 비밀번호에 공백 포함
+            result = -5 : 비밀번호에 공백 포함
             """)
     @PatchMapping("/profile")
     public ResVo patchProfile(@RequestBody UserUbdDto dto){
