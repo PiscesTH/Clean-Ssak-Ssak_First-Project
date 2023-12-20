@@ -4,6 +4,7 @@ import com.clean.cleanssakssak.common.Const;
 import com.clean.cleanssakssak.common.ResVo;
 import com.clean.cleanssakssak.diary.model.*;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class DiaryService {
 
     // 다이어리 작성
     public ResVo postDiary(DiaryInsDto dto) {
-        if (dto.getTitle() == null || dto.getTitle().isBlank()) {
+        if (StringUtils.isBlank(dto.getTitle())) { //dto.getTitle() == null || dto.getTitle().isBlank()
             return new ResVo(Const.DIARY_TITLE_MISSING); // 제목 null 값이거나 제목 빈 문자열 일 경우 -1
         }
         int insDiaryResult = mapper.insDiary(dto);
@@ -29,8 +30,8 @@ public class DiaryService {
         }
         List<String> picsList = new ArrayList<>();
         for (String pic : dto.getPics()) {
-            if (pic != null && !pic.isBlank()) {    //받은 사진 데이터가 null or 빈 문자열인지 체크
-                picsList.add(pic);                  //저장할 사진 데이터 분류
+            if (StringUtils.isNotBlank(pic)) {   //pic != null && !pic.isBlank() , 받은 사진 데이터가 null or 빈 문자열인지 체크
+                picsList.add(pic);             //저장할 사진 데이터 분류
             }
         }
         dto.setPics(picsList);  //분류한 사진 데이터 세팅
@@ -52,7 +53,7 @@ public class DiaryService {
 
     // 다이어리 수정
     public ResVo patchDiary(DiaryUpdDto dto) {
-        if (dto.getTitle() == null || dto.getTitle().isBlank()) {
+        if (StringUtils.isBlank(dto.getTitle())) { //dto.getTitle() == null || dto.getTitle().isBlank()
             return new ResVo(Const.DIARY_TITLE_MISSING); // 제목 null 값이거나 제목 빈 문자열 일 경우 -1
         }
         int updDiaryResult = mapper.updDiary(dto);
@@ -69,8 +70,8 @@ public class DiaryService {
         List<String> picsList = new ArrayList<>();
 
         for (String pic : dto.getPics()) {
-            if (pic != null && !pic.isBlank()) {    //받은 사진 데이터가 null or 빈 문자열인지 체크
-                picsList.add(pic);                  //저장할 사진 데이터 분류
+            if (StringUtils.isNotBlank(pic)) {//pic != null && !pic.isBlank() , 받은 사진 데이터가 null or 빈 문자열인지 체크
+                picsList.add(pic);            //저장할 사진 데이터 분류
             }
         }
         dto.setPics(picsList);  //분류된 사진 데이터 세팅
