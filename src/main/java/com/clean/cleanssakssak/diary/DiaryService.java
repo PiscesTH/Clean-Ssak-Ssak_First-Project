@@ -30,7 +30,7 @@ public class DiaryService {
         }
         List<String> picsList = new ArrayList<>();
         for (String pic : dto.getPics()) {
-            if (StringUtils.hasText(pic)) {   //pic != null && !pic.isBlank() , 받은 사진 데이터가 null or 빈 문자열인지 체크
+            if (!StringUtils.hasText(pic)) {   //pic != null && !pic.isBlank() , 받은 사진 데이터가 null or 빈 문자열인지 체크
                 picsList.add(pic);             //저장할 사진 데이터 분류
             }
         }
@@ -70,7 +70,7 @@ public class DiaryService {
         List<String> picsList = new ArrayList<>();
 
         for (String pic : dto.getPics()) {
-            if (StringUtils.hasText(pic)) {//pic != null && !pic.isBlank() , 받은 사진 데이터가 null or 빈 문자열인지 체크
+            if (!StringUtils.hasText(pic)) {//pic != null && !pic.isBlank() , 받은 사진 데이터가 null or 빈 문자열인지 체크
                 picsList.add(pic);            //저장할 사진 데이터 분류
             }
         }
