@@ -17,9 +17,6 @@ public class DiarySelDto {
     private int startIdx;//
     @JsonIgnore
     private int rowCount = Const.DIARY_ROW_COUNT;
-    @JsonIgnore
-    private int diaryId;
-
 
     public void setPage(int page) { //페이징처리
         this.startIdx = (page - 1) * rowCount;
