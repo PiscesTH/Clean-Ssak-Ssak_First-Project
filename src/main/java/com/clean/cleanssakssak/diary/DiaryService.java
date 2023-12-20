@@ -40,10 +40,14 @@ public class DiaryService {
         return new ResVo(dto.getDiaryId());
     }
 
-    // 다이어리 삭제
-    public ResVo delDiary(DiaryDelDto dto) {
-        int delDiaryResult = mapper.delDiary(dto); // 다이어리 삭제 표시
-        return new ResVo(delDiaryResult); // 0,1 표시
+    // 다이어리 전체 조회 (10개씩 페이징 처리)
+    public List<DiarySelVo> getDiary(DiarySelDto dto) {
+        List<DiarySelVo> list = mapper.selDiaryAll(dto);
+        for (DiarySelVo vo : list) {
+            List<String> pics = mapper.selDiaryPicAll(vo.getDiaryId()); //diary id 이용해서
+            vo.setPics(pics); //사진정보 저장
+        }
+        return list;
     }
 
     // 다이어리 수정
@@ -79,14 +83,9 @@ public class DiaryService {
         return new ResVo(Const.SUCCESS);
     }
 
-    // 다이어리 전체 조회 (10개씩 페이징 처리)
-    public List<DiarySelVo> getDiary(DiarySelDto dto) {
-        List<DiarySelVo> list = mapper.selDiaryAll(dto);
-        for (DiarySelVo vo : list) {
-            List<String> pics = mapper.selDiaryPicAll(vo.getDiaryId()); //diary id 이용해서
-            vo.setPics(pics); //사진정보 저장
-        }
-        return list;
+    // 다이어리 삭제
+    public ResVo delDiary(DiaryDelDto dto) {
+        int delDiaryResult = mapper.delDiary(dto); // 다이어리 삭제 표시
+        return new ResVo(delDiaryResult); // 0,1 표시
     }
-
 }
