@@ -4,8 +4,8 @@ import com.clean.cleanssakssak.common.Const;
 import com.clean.cleanssakssak.common.ResVo;
 import com.clean.cleanssakssak.todo.model.*;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,10 +23,10 @@ public class TodoService {
         ||dto.getDoDay() == null || dto.getDoDay().isBlank()){  //cleaning, do_day 데이터가 null 이거나 공백만 있는 경우 체크
             return new ResVo(Const.NULL);
         }*/
-        if (StringUtils.isBlank(dto.getCleaning())) {  //cleaning, do_day 데이터가 null 이거나 공백만 있는 경우 체크
+        if (StringUtils.hasText(dto.getCleaning())) {  //cleaning, do_day 데이터가 null 이거나 공백만 있는 경우 체크
             return new ResVo(Const.NULL);
         }
-        if (StringUtils.isBlank(dto.getDoDay())) {
+        if (StringUtils.hasText(dto.getDoDay())) {
             return new ResVo(Const.NULL);
         }
 
@@ -64,11 +64,11 @@ public class TodoService {
     // todo 내용 수정
     public ResVo patchTodo(TodoUpdDto dto) {
 
-        if (StringUtils.isBlank(dto.getDoDay())) {// null 체크  //if        if(dto.getDoDay() == null )
+        if (StringUtils.hasText(dto.getDoDay())) {// null 체크  //if        if(dto.getDoDay() == null )
             return new ResVo(Const.NULL);
         }
 
-        if (StringUtils.isBlank(dto.getCleaning())) {//빈문자열 체크       if(cleaning == null || cleaning.isBlank())
+        if (StringUtils.hasText(dto.getCleaning())) {//빈문자열 체크       if(cleaning == null || cleaning.isBlank())
             return new ResVo(Const.NULL);
         }
 
