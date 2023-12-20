@@ -37,15 +37,15 @@ public class DiaryController {
         return service.postDiary(dto);
     }
 
-    //------------------------------- 다이어리 삭제 -------------------------------
-    @Operation(summary = "다이어리 삭제",description = "삭제 완료 : 1 <br>삭제 실패 : 0 ")
+    //------------------------------- 다이어리 전체 조회 -------------------------------
+    @Operation(summary = "다이어리 조회",description = "조회 완료 :result(1), <br>조회 실패 :result(0)")
     @Parameters(value = {
-            @Parameter(name = "user_id", description = "유저")
-            ,@Parameter(name = "diary_id", description = "다이어리 번호")
+            @Parameter(name = "userid", description = "유저")
+            ,@Parameter(name = "page", description = "페이지")
     })
-    @DeleteMapping
-    public ResVo delDiary (@RequestBody DiaryDelDto dto) {
-        return service.delDiary(dto);
+    @GetMapping
+    public List<DiarySelVo> getDiary(DiarySelDto dto) {
+        return service.getDiary(dto);
     }
 
     //------------------------------- 다이어리 수정 -------------------------------
@@ -64,16 +64,17 @@ public class DiaryController {
         return service.patchDiary(dto);
     }
 
-    //------------------------------- 다이어리 전체 조회 -------------------------------
-    @Operation(summary = "다이어리 조회",description = "조회 완료 :result(1), <br>조회 실패 :result(0)")
-    @Parameters(value = {
-            @Parameter(name = "userid", description = "유저")
-            ,@Parameter(name = "page", description = "페이지")
-    })
-    @GetMapping
-    public List<DiarySelVo> getDiary(DiarySelDto dto) {
-        return service.getDiary(dto);
-    }
 
+
+    //------------------------------- 다이어리 삭제 -------------------------------
+    @Operation(summary = "다이어리 삭제",description = "삭제 완료 : 1 <br>삭제 실패 : 0 ")
+    @Parameters(value = {
+            @Parameter(name = "user_id", description = "유저")
+            ,@Parameter(name = "diary_id", description = "다이어리 번호")
+    })
+    @DeleteMapping
+    public ResVo delDiary (@RequestBody DiaryDelDto dto) {
+        return service.delDiary(dto);
+    }
 }
 
