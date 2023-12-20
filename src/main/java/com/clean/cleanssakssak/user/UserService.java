@@ -37,13 +37,13 @@ public class UserService {
             return new ResVo(Const.ID_PW_BLANK);
         }
 */
-        if(StringUtils.hasText(dto.getUid())){//ID와 NickName, password 공란 또는 null만 들어옴
+        if(!StringUtils.hasText(dto.getUid())){//ID와 NickName, password 공란 또는 null만 들어옴
             return new ResVo(Const.ID_NULL);
         }
-        if(StringUtils.hasText(dto.getNickname())){
+        if(!StringUtils.hasText(dto.getNickname())){
             return new ResVo(Const.NICKNAME_NULL);
         }
-        if(StringUtils.hasText(dto.getUpw())){
+        if(!StringUtils.hasText(dto.getUpw())){
             return new ResVo(Const.PW_NULL);
         }
         if(dto.getUid().contains(" ") || dto.getUpw().contains(" ")){//ID와 PW 사이에 공백이 포함됨 들어옴
