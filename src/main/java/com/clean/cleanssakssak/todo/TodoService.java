@@ -55,9 +55,11 @@ public class TodoService {
 
         dto.setRowCount(Const.TODO_ROW_COUNT);  //페이징 처리에 필요한 데이터 설정
         dto.setStartIdx((dto.getPage() - 1) * Const.TODO_ROW_COUNT);  //페이징 처리에 필요한 데이터 설정
-
-        return mapper.selTodoAll(dto);
-
+        try {
+            return mapper.selTodoAll(dto);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     // todo 내용 수정
