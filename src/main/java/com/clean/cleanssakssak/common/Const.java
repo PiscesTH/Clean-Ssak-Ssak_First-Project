@@ -27,4 +27,7 @@ public class Const {// 주로 사용되는 응답값 상수 정의
 
     public static final int NOT_EXIST_CLEANING = -1;
     public static final int NOT_ALLOWED_DO_DAY = -2;
+
+    public static final int INTERNAL_SERVER_ERROR = 500;
+
 }

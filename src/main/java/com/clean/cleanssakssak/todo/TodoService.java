@@ -39,7 +39,7 @@ public class TodoService {
         try {
             int insResult = mapper.insTodo(dto);
         } catch (Exception e) {
-            e.printStackTrace();
+            return new ResVo(Const.INTERNAL_SERVER_ERROR);
         }
 
         /*if(insResult == 0){
@@ -77,13 +77,11 @@ public class TodoService {
         dayList.remove(dayList.size() - 1);
         String day = String.join("-", dayList);
         dto.setDoDay(day);      //원하는 데이터 형식으로 변경한 날짜 세팅
-
         try {
             int result = mapper.updTodo(dto);
             return new ResVo(Const.SUCCESS);
         } catch (Exception e) {
-            e.printStackTrace();
-            return new ResVo(Const.FAIL);
+            return new ResVo(Const.INTERNAL_SERVER_ERROR);
         }
     }
 
