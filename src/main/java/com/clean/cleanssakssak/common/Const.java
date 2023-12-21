@@ -25,4 +25,7 @@ public class Const {// 주로 사용되는 응답값 상수 정의
     public static final int IS_DEL = 1;// todo 삭제 시 쓰일 값
 
     public static final int NULL = -4; // 받아와야 하는 값이 null이라서 실행 불가
+
+    public static final int NOT_EXIST_CLEANING = -1;
+    public static final int NOT_ALLOWED_DO_DAY = -2;
 }

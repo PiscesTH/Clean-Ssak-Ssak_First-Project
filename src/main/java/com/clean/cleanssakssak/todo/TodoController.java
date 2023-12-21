@@ -24,7 +24,8 @@ public class TodoController {
     @Operation(summary = "todo 일정 등록", description = """
             등록 성공 : todo_id 값 리턴<br> 
             등록 실패 : 0 <br> 
-            들어온 값이 null 또는 빈문자열 : -4""")
+            cleaning 값이 제대로 안 들어온 경우 : -1<br>
+            do_day 값이 제대로 안 들어온 경우 : -2""")
     @PostMapping
     public ResVo postTodo(@RequestBody TodoInsDto dto) {
         return service.postTodo(dto);

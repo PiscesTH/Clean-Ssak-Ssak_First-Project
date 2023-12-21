@@ -24,10 +24,10 @@ public class TodoService {
             return new ResVo(Const.NULL);
         }*/
         if (!StringUtils.hasText(dto.getCleaning())) {  //cleaning, do_day 데이터가 null 이거나 공백만 있는 경우 체크
-            return new ResVo(Const.NULL);
+            return new ResVo(Const.NOT_EXIST_CLEANING);//-1
         }
-        if (!StringUtils.hasText(dto.getDoDay())) {
-            return new ResVo(Const.NULL);
+        if (!StringUtils.hasText(dto.getDoDay()) && StringUtils.containsWhitespace(dto.getDoDay())) {
+            return new ResVo(Const.NOT_ALLOWED_DO_DAY);//-2
         }
 
         String[] tmp = dto.getDoDay().split("/");   //입력받은 날짜 데이터 원하는 형식으로 변경
@@ -68,7 +68,7 @@ public class TodoService {
             return new ResVo(Const.NULL);
         }
 
-        if (!StringUtils.hasText(dto.getCleaning())) {//빈문자열 체크       if(cleaning == null || cleaning.isBlank())
+        if (!StringUtils.hasText(dto.getCleaning()) && StringUtils.containsWhitespace(dto.getCleaning())) {//빈문자열 체크       if(cleaning == null || cleaning.isBlank())
             return new ResVo(Const.NULL);
         }
 
@@ -81,10 +81,11 @@ public class TodoService {
 
         try {
             int result = mapper.updTodo(dto);
+            return new ResVo(Const.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
+            return new ResVo(Const.FAIL);
         }
-        return new ResVo(Const.SUCCESS);
     }
 
     // todo 삭제
