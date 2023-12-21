@@ -9,6 +9,8 @@ import com.clean.cleanssakssak.user.model.UserUbdDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +38,11 @@ public class UserController {
             @Parameter(name = "upw", description = "비밀번호"),
             @Parameter(name = "nickname", description = "별명")
     })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "통신 성공"),
+            @ApiResponse(responseCode = "400", description = "요청 오류"),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
     @PostMapping("/signup")
     public ResVo postSignup(@RequestBody UserInsSignupDto dto){
         return service.postSignup(dto);
@@ -49,6 +56,11 @@ public class UserController {
             @Parameter(name = "uid", description = "아이디"),
             @Parameter(name = "upw", description = "비밀번호")
     })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "통신 성공"),
+            @ApiResponse(responseCode = "400", description = "요청 오류"),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
     @PostMapping("/signin")
     public UserSigninVo postSignin(@RequestBody UserSigninDto dto){
         return service.postSignin(dto);
@@ -61,6 +73,11 @@ public class UserController {
             result = 2 : ( 수정 두 개 시도 시 )변경 성공<br>
             result = -4 : 허용되지 않는 비밀번호 형식<br>
             """)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "통신 성공"),
+            @ApiResponse(responseCode = "400", description = "요청 오류"),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
     @PatchMapping("/profile")
     public ResVo patchProfile(@RequestBody UserUbdDto dto){
         return service.patchProfile(dto);
@@ -71,6 +88,11 @@ public class UserController {
             result = 1 : 회원 탈퇴 성공<br>
             result = 0 : 회원 탈퇴 실패
             """)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "통신 성공"),
+            @ApiResponse(responseCode = "400", description = "요청 오류"),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
     @DeleteMapping("/profile")
     public ResVo delProfile(@RequestParam int loginedUserId){
         return service.delProfile(loginedUserId);

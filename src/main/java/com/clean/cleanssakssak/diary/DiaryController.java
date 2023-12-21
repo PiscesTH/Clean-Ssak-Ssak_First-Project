@@ -5,6 +5,8 @@ import com.clean.cleanssakssak.diary.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +34,11 @@ public class DiaryController {
             ,@Parameter(name = "user_id", description = "유저")
             ,@Parameter(name = "pics", description = "사진")
     })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "통신 성공"),
+            @ApiResponse(responseCode = "400", description = "요청 오류"),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
     @PostMapping()
     public ResVo postDiary (@RequestBody DiaryInsDto dto) {
         return service.postDiary(dto);
@@ -42,6 +49,11 @@ public class DiaryController {
     @Parameters(value = {
             @Parameter(name = "userid", description = "유저")
             ,@Parameter(name = "page", description = "페이지")
+    })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "통신 성공"),
+            @ApiResponse(responseCode = "400", description = "요청 오류"),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @GetMapping
     public List<DiarySelVo> getDiary(DiarySelDto dto) {
@@ -59,6 +71,11 @@ public class DiaryController {
             ,@Parameter(name = "user_id", description = "유저")
             ,@Parameter(name = "diary_id", description = "다이어리 번호")
     })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "통신 성공"),
+            @ApiResponse(responseCode = "400", description = "요청 오류"),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
     @PatchMapping
     public ResVo patchDiary (@RequestBody DiaryUpdDto dto) {
         return service.patchDiary(dto);
@@ -71,6 +88,11 @@ public class DiaryController {
     @Parameters(value = {
             @Parameter(name = "user_id", description = "유저")
             ,@Parameter(name = "diary_id", description = "다이어리 번호")
+    })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "통신 성공"),
+            @ApiResponse(responseCode = "400", description = "요청 오류"),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @DeleteMapping
     public ResVo delDiary (@RequestBody DiaryDelDto dto) {
