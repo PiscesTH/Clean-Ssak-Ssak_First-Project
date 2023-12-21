@@ -26,11 +26,10 @@ public class TodoService {
         if (!StringUtils.hasText(dto.getCleaning())) {  //cleaning, do_day 데이터가 null 이거나 공백만 있는 경우 체크
             return new ResVo(Const.NOT_EXIST_CLEANING);//-1
         }
-        if (!StringUtils.hasText(dto.getDoDay()) && StringUtils.containsWhitespace(dto.getDoDay())) {
+        if (!StringUtils.hasText(dto.getDoDay())) {
             return new ResVo(Const.NOT_ALLOWED_DO_DAY);//-2
         }
-
-        String[] tmp = dto.getDoDay().split("/");   //입력받은 날짜 데이터 원하는 형식으로 변경
+        String[] tmp = StringUtils.trimAllWhitespace(dto.getDoDay()).split("/");   //입력받은 날짜 데이터 원하는 형식으로 변경
         List<String> list = new ArrayList<>(Arrays.asList(tmp));
         list.add(0, list.get(list.size() - 1));
         list.remove(list.size() - 1);
@@ -68,11 +67,11 @@ public class TodoService {
             return new ResVo(Const.NOT_EXIST_CLEANING);
         }
 
-        if (!StringUtils.hasText(dto.getDoDay()) && StringUtils.containsWhitespace(dto.getDoDay())) {// null 체크  //if        if(dto.getDoDay() == null )
+        if (!StringUtils.hasText(dto.getDoDay())) {// null 체크  //if        if(dto.getDoDay() == null )
             return new ResVo(Const.NOT_ALLOWED_DO_DAY);
         }
 
-        String[] dayArr = dto.getDoDay().split("/");//입력받은 날짜 데이터 원하는 형식으로 변경
+        String[] dayArr = StringUtils.trimAllWhitespace(dto.getDoDay()).split("/");//입력받은 날짜 데이터 원하는 형식으로 변경
         List<String> dayList = new ArrayList<>(Arrays.asList(dayArr));
         dayList.add(0, dayList.get(dayList.size() - 1));
         dayList.remove(dayList.size() - 1);
