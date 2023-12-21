@@ -30,7 +30,7 @@ public class DiaryController {
             @Parameter(name = "contents", description = "내용")
             ,@Parameter(name = "title", description = "제목")
             ,@Parameter(name = "user_id", description = "유저")
-            ,@Parameter(name = "pic", description = "사진")
+            ,@Parameter(name = "pics", description = "사진")
     })
     @PostMapping()
     public ResVo postDiary (@RequestBody DiaryInsDto dto) {

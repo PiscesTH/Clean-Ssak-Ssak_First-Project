@@ -38,16 +38,13 @@ public class TodoService {
 
         try {
             int insResult = mapper.insTodo(dto);
+            return new ResVo(dto.getTodoId());  //등록한 todo pk값 리턴
         } catch (Exception e) {
             return new ResVo(Const.INTERNAL_SERVER_ERROR);
         }
-
         /*if(insResult == 0){
             return new ResVo(Const.FAIL);
         }*/
-
-        return new ResVo(dto.getTodoId());  //등록한 todo pk값 리턴
-
     }
 
     //등록한 todo 전체 조회(한 페이지에 8개씩 페이징 처리)
@@ -97,17 +94,21 @@ public class TodoService {
 
     // todo check 처리
     public ResVo toggleCheck(TodoToggleCheckDto dto) {
-        Integer result = mapper.selCheck(dto);
-        if (result == 0) {// check가 없는 경우      }else if (result == 0){
-            dto.setCheck(Const.CHECK_ON);// 체크 update
-            mapper.upCheck(dto);
-            return new ResVo(Const.SUCCESS);
+        try {
+            Integer result = mapper.selCheck(dto);
+            if (result == 0) {// check가 없는 경우      }else if (result == 0){
+                dto.setCheck(Const.CHECK_ON);// 체크 update
+                mapper.upCheck(dto);
+                return new ResVo(Const.SUCCESS);
+            }
+            if (result == 1) {// 이미 check가 되어있는경우
+                dto.setCheck(Const.CHECK_OFF);
+                mapper.upCheck(dto);//체크 취소 update
+                return new ResVo(Const.CANCEL);
+            }
+        }catch (Exception e){
+            return new ResVo(Const.INTERNAL_SERVER_ERROR);
         }
-        if (result == 1) {// 이미 check가 되어있는경우
-            dto.setCheck(Const.CHECK_OFF);
-            mapper.upCheck(dto);//체크 취소 update
-            return new ResVo(Const.CANCEL);
-        }
-        return new ResVo(Const.FAIL);//select 실패 시
+        return new ResVo(Const.FAIL);
     }
 }
