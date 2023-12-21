@@ -7,8 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -29,12 +27,6 @@ public class TodoService {
         if (!StringUtils.hasText(dto.getDoDay())) {
             return new ResVo(Const.NOT_ALLOWED_DO_DAY);//-2
         }
-        String[] tmp = StringUtils.trimAllWhitespace(dto.getDoDay()).split("/");   //입력받은 날짜 데이터 원하는 형식으로 변경
-        List<String> list = new ArrayList<>(Arrays.asList(tmp));
-        list.add(0, list.get(list.size() - 1));
-        list.remove(list.size() - 1);
-        String date = String.join("-", list);
-        dto.setDoDay(date);     //원하는 데이터 형식으로 변경한 날짜 세팅
 
         try {
             int insResult = mapper.insTodo(dto);
@@ -70,14 +62,8 @@ public class TodoService {
             return new ResVo(Const.NOT_ALLOWED_DO_DAY);
         }
 
-        String[] dayArr = StringUtils.trimAllWhitespace(dto.getDoDay()).split("/");//입력받은 날짜 데이터 원하는 형식으로 변경
-        List<String> dayList = new ArrayList<>(Arrays.asList(dayArr));
-        dayList.add(0, dayList.get(dayList.size() - 1));
-        dayList.remove(dayList.size() - 1);
-        String day = String.join("-", dayList);
-        dto.setDoDay(day);      //원하는 데이터 형식으로 변경한 날짜 세팅
         try {
-            int result = mapper.updTodo(dto);
+            int updResult = mapper.updTodo(dto);
             return new ResVo(Const.SUCCESS);
         } catch (Exception e) {
             return new ResVo(Const.INTERNAL_SERVER_ERROR);
@@ -86,9 +72,12 @@ public class TodoService {
 
     // todo 삭제
     public ResVo delTodo(TodoDelDto dto) {
-
-        int result = mapper.delTodo(dto);
-        return new ResVo(result);
+        try {
+            int result = mapper.delTodo(dto);
+            return new ResVo(result);
+        } catch (Exception e) {
+            return new ResVo(Const.INTERNAL_SERVER_ERROR);
+        }
 
     }
 
@@ -106,7 +95,7 @@ public class TodoService {
                 mapper.upCheck(dto);//체크 취소 update
                 return new ResVo(Const.CANCEL);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResVo(Const.INTERNAL_SERVER_ERROR);
         }
         return new ResVo(Const.FAIL);

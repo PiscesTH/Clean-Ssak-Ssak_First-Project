@@ -21,31 +21,8 @@
         </foreach>
     </insert>
 
-    <update id="delDiary"> <!-- 다이어리 삭제시 is del 1으로 변경 -->
-        UPDATE t_diary
-        set is_del = 1
-        WHERE diary_id = #{diaryId}
-        AND user_id = #{loginedUserId}
-    </update>
-
-    <delete id="delDiaryPics"> <!-- 다이어리 사진 삭제, 유저 확인 -->
-        DELETE B
-        FROM t_diary A
-        LEFT JOIN t_diary_pic B
-        ON A.diary_id = B.diary_id
-        WHERE (A.diary_id, A.user_id) = (#{diaryId},#{loginedUserId});
-    </delete>
-
-    <update id="updDiary"> <!-- 다이어리 제목 내용 수정 -->
-        UPDATE t_diary
-        SET
-        title = #{title}
-        ,contents = #{contents}
-        WHERE user_id = #{loginedUserId} AND diary_id = #{diaryId}
-    </update>
-
     <select id="selDiaryAll"> <!-- 다이어리 페이징처리 -->
-        SELECT A.diary_id AS diaryId, B.nickname, A.title, A.contents, A.created_at AS createdAt
+        SELECT A.diary_id AS diaryId, A.title, A.contents
         FROM t_diary A
         JOIN t_user B
         USING (user_id)
@@ -60,7 +37,30 @@
         FROM t_diary_pic
         WHERE diary_id = #{diaryId}
     </select>
-    
+
+    <update id="delDiary"> <!-- 다이어리 삭제시 is del 1으로 변경 -->
+        UPDATE t_diary
+        set is_del = 1
+        WHERE diary_id = #{diaryId}
+        AND user_id = #{loginedUserId}
+    </update>
+
+    <update id="updDiary"> <!-- 다이어리 제목 내용 수정 -->
+        UPDATE t_diary
+        SET
+        title = #{title}
+        ,contents = #{contents}
+        WHERE user_id = #{loginedUserId} AND diary_id = #{diaryId}
+    </update>
+
+    <delete id="delDiaryPics"> <!-- 다이어리 사진 삭제, 유저 확인 -->
+        DELETE B
+        FROM t_diary A
+        LEFT JOIN t_diary_pic B
+        ON A.diary_id = B.diary_id
+        WHERE (A.diary_id, A.user_id) = (#{diaryId},#{loginedUserId});
+    </delete>
+
     <delete id="delDiaryPicForUnregister">
         DELETE B
         FROM t_diary A

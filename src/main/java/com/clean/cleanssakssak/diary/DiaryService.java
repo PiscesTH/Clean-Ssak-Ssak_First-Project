@@ -20,15 +20,10 @@ public class DiaryService {
         if (!StringUtils.hasText(dto.getTitle())) { //dto.getTitle() == null || dto.getTitle().isBlank()
             return new ResVo(Const.DIARY_TITLE_MISSING); // 제목 null 값이거나 제목 빈 문자열 일 경우 -1
         }
-        int insDiaryResult;
         try {
-            insDiaryResult = mapper.insDiary(dto);
+            int insDiaryResult = mapper.insDiary(dto);
         } catch (Exception e) {
             return new ResVo(Const.INTERNAL_SERVER_ERROR);
-        }
-
-        if (insDiaryResult == 0) {//다이어리 insert 실패 시
-            return new ResVo(Const.FAIL);
         }
         if (dto.getPics() == null) {     //받아온 사진 리스트 데이터가 null인지 체크
             return new ResVo(dto.getDiaryId());
@@ -41,11 +36,10 @@ public class DiaryService {
         }
         dto.setPics(picsList);  //분류한 사진 데이터 세팅
         if (!picsList.isEmpty()) {  //등록할 사진 있는지 체크
-            int insPicsResult;
             try {
-                insPicsResult = mapper.insDiaryPic(dto);
+                int insPicsResult = mapper.insDiaryPic(dto);
             } catch (Exception e) {
-                return null;
+                return new ResVo(Const.INTERNAL_SERVER_ERROR);
             }
         }
         return new ResVo(dto.getDiaryId());
@@ -53,21 +47,16 @@ public class DiaryService {
 
     // 다이어리 전체 조회 (10개씩 페이징 처리)
     public List<DiarySelVo> getDiary(DiarySelDto dto) {
-        List<DiarySelVo> list;
         try {
-            list = mapper.selDiaryAll(dto);
-        } catch (Exception e) {
-            return null;
-        }
-        try {
+            List<DiarySelVo> list = mapper.selDiaryAll(dto);
             for (DiarySelVo vo : list) {
                 List<String> pics = mapper.selDiaryPicAll(vo.getDiaryId()); //diary id 이용해서
                 vo.setPics(pics); //사진정보 저장
             }
-        }catch (Exception e) {
+            return list;
+        } catch (Exception e) {
             return null;
         }
-        return list;
     }
 
     // 다이어리 수정
@@ -75,16 +64,13 @@ public class DiaryService {
         if (!StringUtils.hasText(dto.getTitle())) { //dto.getTitle() == null || dto.getTitle().isBlank()
             return new ResVo(Const.DIARY_TITLE_MISSING); // 제목 null 값이거나 제목 빈 문자열 일 경우 -1
         }
-        int updDiaryResult;
         try {
-            updDiaryResult = mapper.updDiary(dto);
+            int updDiaryResult = mapper.updDiary(dto);
         } catch (Exception e) {
             return new ResVo(Const.INTERNAL_SERVER_ERROR);
         }
-
-        int delPicsResult;
         try {
-            delPicsResult = mapper.delDiaryPics(DiaryDelDto.builder()   //사진 삭제 처리
+            int delPicsResult = mapper.delDiaryPics(DiaryDelDto.builder()   //사진 삭제 처리
                     .diaryId(dto.getDiaryId())
                     .loginedUserId(dto.getLoginedUserId())
                     .build());
@@ -104,9 +90,8 @@ public class DiaryService {
         }
         dto.setPics(picsList);  //분류된 사진 데이터 세팅
         if (!picsList.isEmpty()) {//등록할 사진 있는지 체크
-            int insPicsResult;
             try {
-                insPicsResult = mapper.insDiaryPic(DiaryInsDto.builder()    //사진 등록
+                int insPicsResult = mapper.insDiaryPic(DiaryInsDto.builder()    //사진 등록
                         .diaryId(dto.getDiaryId())
                         .pics(dto.getPics())
                         .build());
