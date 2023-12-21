@@ -37,17 +37,14 @@ public class UserService {
             return new ResVo(Const.ID_PW_BLANK);
         }
 */
-        if(!StringUtils.hasText(dto.getUid())){//ID와 NickName, password 공란 또는 null만 들어옴
-            return new ResVo(Const.ID_NULL);
+        if(!StringUtils.hasText(dto.getUid()) || StringUtils.containsWhitespace(dto.getUid())){//ID와 NickName, password 공란 또는 null만 들어옴
+            return new ResVo(Const.NOT_ALLOWED_ID);
         }
         if(!StringUtils.hasText(dto.getNickname())){
-            return new ResVo(Const.NICKNAME_NULL);
+            return new ResVo(Const.NOT_ALLOWED_NICKNAME);
         }
-        if(!StringUtils.hasText(dto.getUpw())){
-            return new ResVo(Const.PW_NULL);
-        }
-        if(dto.getUid().contains(" ") || dto.getUpw().contains(" ")){//ID와 PW 사이에 공백이 포함됨 들어옴
-            return new ResVo(Const.ID_PW_BLANK);
+        if(!StringUtils.hasText(dto.getUpw()) || StringUtils.containsWhitespace(dto.getUpw())){
+            return new ResVo(Const.NOT_ALLOWED_PW);
         }
 
         int idCheck = userMapper.selIdComparison(dto.getUid());//ID 중복 체크
@@ -82,7 +79,7 @@ public class UserService {
         String hashedPassword = userMapper.selSigninPw(dto);// 받아온 유저의 uid값을 이용해 해당 upw를 SELECT
 
         if(hashedPassword == null){//SELECT 하지 못한 것 = 해당 uid가 없다
-            vo.setResult(Const.ID_FAIL);
+            vo.setResult(Const.LOGIN_FAILED_BY_UID);
             return vo;
         }
         if(BCrypt.checkpw(dto.getUpw(), hashedPassword)){
@@ -92,24 +89,27 @@ public class UserService {
             return vo;
         }
 
-        vo.setResult(Const.PW_FAIL);//위의 IF문에 다 해당되지 않는다면 upw가 틀렸다는 뜻
+        vo.setResult(Const.LOGIN_FAILED_BY_UPW);//위의 IF문에 다 해당되지 않는다면 upw가 틀렸다는 뜻
 
         return vo;
     }
 
     //유저 회원정보(비밀번호, 닉네임) 변경 처리
     public ResVo patchProfile(UserUbdDto dto){
-        if (dto.getUpw() != null && dto.getUpw().contains(" ")) {//수정할 비밀번호 데이터에 공백이 포함되어 있다
-            return new ResVo(Const.ID_PW_BLANK);
+        if (!StringUtils.hasText(dto.getUpw()) && !StringUtils.hasText(dto.getNickname())){//비밀번호, 닉네임 둘 다 값이 없을 경우
+            return new ResVo(Const.FAIL);//0
+        }
+        if (StringUtils.hasText(dto.getUpw()) && StringUtils.containsWhitespace(dto.getUpw())) {//수정할 비밀번호 데이터에 공백이 포함되어 있다
+            return new ResVo(Const.NOT_ALLOWED_PW);//-4
         }
         int updResult = 0;
-        if (dto.getUpw() != null && !dto.getUpw().isBlank()){//수정할 비밀번호 데이터가 제대로 들어온 경우
+        if (StringUtils.hasText(dto.getUpw())){//수정할 비밀번호 데이터가 제대로 들어온 경우
             String hashedUpw = BCrypt.hashpw(dto.getUpw(),BCrypt.gensalt());//비밀번호 암호화
             dto.setUpw(hashedUpw);
             updResult += userMapper.updUserUpw(dto);//비밀번호 수정
         }
 
-        if(dto.getNickname() == null || dto.getNickname().isBlank()){
+        if(!StringUtils.hasText(dto.getNickname())){
             return new ResVo(updResult);
         }
 
