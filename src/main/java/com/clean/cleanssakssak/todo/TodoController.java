@@ -43,7 +43,8 @@ public class TodoController {
             일정 내용 수정<br>
             수정 성공 : 1<br>
             수정 실패 : 0<br>
-            들어온 값이 null 또는 빈 문자열이라 실패 : -4""")
+            cleaning 값이 제대로 안 들어온 경우 : -1<br>
+            do_day 값이 제대로 안 들어온 경우 : -2""")
     @Parameters(value = {
             @Parameter(name = "userId", description = "todo를 수정하고 싶은 유저의 PK"),
             @Parameter(name = "todoId", description = "해당 todo의 PK"),

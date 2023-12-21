@@ -64,12 +64,12 @@ public class TodoService {
     // todo 내용 수정
     public ResVo patchTodo(TodoUpdDto dto) {
 
-        if (!StringUtils.hasText(dto.getDoDay())) {// null 체크  //if        if(dto.getDoDay() == null )
-            return new ResVo(Const.NULL);
+        if (!StringUtils.hasText(dto.getCleaning())) {//빈문자열 체크       if(cleaning == null || cleaning.isBlank())
+            return new ResVo(Const.NOT_EXIST_CLEANING);
         }
 
-        if (!StringUtils.hasText(dto.getCleaning()) && StringUtils.containsWhitespace(dto.getCleaning())) {//빈문자열 체크       if(cleaning == null || cleaning.isBlank())
-            return new ResVo(Const.NULL);
+        if (!StringUtils.hasText(dto.getDoDay()) && StringUtils.containsWhitespace(dto.getDoDay())) {// null 체크  //if        if(dto.getDoDay() == null )
+            return new ResVo(Const.NOT_ALLOWED_DO_DAY);
         }
 
         String[] dayArr = dto.getDoDay().split("/");//입력받은 날짜 데이터 원하는 형식으로 변경
