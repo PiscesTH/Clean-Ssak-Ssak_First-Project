@@ -61,7 +61,7 @@ public class TodoController {
             @Parameter(name = "todoId", description = "해당 todo의 PK")
     })
     @DeleteMapping
-    public ResVo delTodo(@RequestBody TodoDelDto dto){
+    public ResVo delTodo(TodoDelDto dto){
         return service.delTodo(dto);
     }
 
