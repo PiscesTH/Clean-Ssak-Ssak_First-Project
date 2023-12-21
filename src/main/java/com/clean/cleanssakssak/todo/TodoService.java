@@ -24,13 +24,12 @@ public class TodoService {
             return new ResVo(Const.NULL);
         }*/
         if (!StringUtils.hasText(dto.getCleaning())) {  //cleaning, do_day 데이터가 null 이거나 공백만 있는 경우 체크
-            return new ResVo(Const.NULL);
+            return new ResVo(Const.NOT_EXIST_CLEANING);//-1
         }
         if (!StringUtils.hasText(dto.getDoDay())) {
-            return new ResVo(Const.NULL);
+            return new ResVo(Const.NOT_ALLOWED_DO_DAY);//-2
         }
-
-        String[] tmp = dto.getDoDay().split("/");   //입력받은 날짜 데이터 원하는 형식으로 변경
+        String[] tmp = StringUtils.trimAllWhitespace(dto.getDoDay()).split("/");   //입력받은 날짜 데이터 원하는 형식으로 변경
         List<String> list = new ArrayList<>(Arrays.asList(tmp));
         list.add(0, list.get(list.size() - 1));
         list.remove(list.size() - 1);
@@ -64,15 +63,15 @@ public class TodoService {
     // todo 내용 수정
     public ResVo patchTodo(TodoUpdDto dto) {
 
-        if (!StringUtils.hasText(dto.getDoDay())) {// null 체크  //if        if(dto.getDoDay() == null )
-            return new ResVo(Const.NULL);
-        }
-
         if (!StringUtils.hasText(dto.getCleaning())) {//빈문자열 체크       if(cleaning == null || cleaning.isBlank())
-            return new ResVo(Const.NULL);
+            return new ResVo(Const.NOT_EXIST_CLEANING);
         }
 
-        String[] dayArr = dto.getDoDay().split("/");//입력받은 날짜 데이터 원하는 형식으로 변경
+        if (!StringUtils.hasText(dto.getDoDay())) {// null 체크  //if        if(dto.getDoDay() == null )
+            return new ResVo(Const.NOT_ALLOWED_DO_DAY);
+        }
+
+        String[] dayArr = StringUtils.trimAllWhitespace(dto.getDoDay()).split("/");//입력받은 날짜 데이터 원하는 형식으로 변경
         List<String> dayList = new ArrayList<>(Arrays.asList(dayArr));
         dayList.add(0, dayList.get(dayList.size() - 1));
         dayList.remove(dayList.size() - 1);
@@ -81,10 +80,11 @@ public class TodoService {
 
         try {
             int result = mapper.updTodo(dto);
+            return new ResVo(Const.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
+            return new ResVo(Const.FAIL);
         }
-        return new ResVo(Const.SUCCESS);
     }
 
     // todo 삭제

@@ -38,13 +38,13 @@ public class UserService {
         }
 */
         if(!StringUtils.hasText(dto.getUid()) || StringUtils.containsWhitespace(dto.getUid())){//ID와 NickName, password 공란 또는 null만 들어옴
-            return new ResVo(Const.NOT_ALLOWED_ID);
-        }
-        if(!StringUtils.hasText(dto.getNickname())){
-            return new ResVo(Const.NOT_ALLOWED_NICKNAME);
+            return new ResVo(Const.NOT_ALLOWED_ID);//-2
         }
         if(!StringUtils.hasText(dto.getUpw()) || StringUtils.containsWhitespace(dto.getUpw())){
-            return new ResVo(Const.NOT_ALLOWED_PW);
+            return new ResVo(Const.NOT_ALLOWED_PW);//-3
+        }
+        if(!StringUtils.hasText(dto.getNickname())){
+            return new ResVo(Const.NOT_ALLOWED_NICKNAME);//-4
         }
 
         int idCheck = userMapper.selIdComparison(dto.getUid());//ID 중복 체크
@@ -97,7 +97,7 @@ public class UserService {
     //유저 회원정보(비밀번호, 닉네임) 변경 처리
     public ResVo patchProfile(UserUbdDto dto){
         if (!StringUtils.hasText(dto.getUpw()) && !StringUtils.hasText(dto.getNickname())){//비밀번호, 닉네임 둘 다 값이 없을 경우
-            return new ResVo(Const.FAIL);//0
+            return new ResVo(Const.NOT_ALLOWED_ID + Const.NOT_ALLOWED_PW);//-6
         }
         if (StringUtils.hasText(dto.getUpw()) && StringUtils.containsWhitespace(dto.getUpw())) {//수정할 비밀번호 데이터에 공백이 포함되어 있다
             return new ResVo(Const.NOT_ALLOWED_PW);//-4

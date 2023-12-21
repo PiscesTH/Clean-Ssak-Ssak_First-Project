@@ -25,17 +25,16 @@ public class UserController {
     //---------------------------------- 유저 회원가입 ---------------------------------------
     @Operation(summary = "회원가입", description = """
             유저 회원가입 시 입력할 정보<br>
-            -5 : ID 또는 비밀번호(또는 둘 다) 중간에 빈 문자열 포함되어있다(실패)<br>
-            -4 : NICKNAME null 혹은 빈 문자열만 들어왔다(실패)<br>
-            -3 : PW null 혹은 빈 문자열만 들어왔다(실패)<br>
-            -2 : ID null 혹은 빈 문자열만 들어왔다(실패)<br>
+            -4 : 허용되지 않는 닉네임 형식(실패)<br>
+            -3 : 허용되지 않는 비밀번호 형식(실패)<br>
+            -2 : 허용되지 않는 아이디 형식(실패)<br>
             -1 : ID가 중복된다(실패)<br>
-            0 : nick_name이 중복된다(실패)<br>
+            -5 : nick_name이 중복된다(실패)<br>
             user_id( PK값 ) : 회원가입 성공""")
     @Parameters(value = {
             @Parameter(name = "uid", description = "아이디"),
             @Parameter(name = "upw", description = "비밀번호"),
-            @Parameter(name = "nickname", description = "별명 / 성함")
+            @Parameter(name = "nickname", description = "별명")
     })
     @PostMapping("/signup")
     public ResVo postSignup(@RequestBody UserInsSignupDto dto){
@@ -57,10 +56,10 @@ public class UserController {
 
     //---------------------------------- 유저 정보 수정 ---------------------------------------
     @Operation(summary = "유저의 비밀번호/닉네임 변경 처리", description = """
-            result = 0 : 변경 실패<br>
+            result = -6 : 아이디, 비밀번호 입력 안함<br>
             result = 1 : ( 수정 한 개만 시도 시 )변경 성공<br>
             result = 2 : ( 수정 두 개 시도 시 )변경 성공<br>
-            result = -5 : 비밀번호에 공백 포함
+            result = -4 : 허용되지 않는 비밀번호 형식<br>
             """)
     @PatchMapping("/profile")
     public ResVo patchProfile(@RequestBody UserUbdDto dto){
