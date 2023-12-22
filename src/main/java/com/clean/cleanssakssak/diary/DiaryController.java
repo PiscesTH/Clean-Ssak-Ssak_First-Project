@@ -27,7 +27,7 @@ public class DiaryController {
     @Operation(summary = "다이어리 작성",description = """
     작성 완료 : diary pk(값)<br>
     작성 실패 : 0 <br>
-    제목 null 값 혹은 빈 문자열 :-1""")
+    잘못된 제목 형식 :-1""")
     @Parameters(value = {
             @Parameter(name = "contents", description = "내용")
             ,@Parameter(name = "title", description = "제목")
@@ -45,9 +45,9 @@ public class DiaryController {
     }
 
     //------------------------------- 다이어리 전체 조회 -------------------------------
-    @Operation(summary = "다이어리 조회",description = "조회 완료 :result(1), <br>조회 실패 :result(0)")
+    @Operation(summary = "다이어리 조회")
     @Parameters(value = {
-            @Parameter(name = "userid", description = "유저")
+            @Parameter(name = "user_id", description = "유저")
             ,@Parameter(name = "page", description = "페이지")
     })
     @ApiResponses(value = {
@@ -64,7 +64,7 @@ public class DiaryController {
     @Operation(summary = "다이어리 수정",description = """
     수정 완료 : 1<br>
     수정 실패 : 0<br>
-    제목 null 값 혹은 빈 문자열 : -1""")
+    잘못된 제목 형식 : -1""")
     @Parameters(value = {
             @Parameter(name = "contents", description = "내용")
             ,@Parameter(name = "title", description = "제목")
