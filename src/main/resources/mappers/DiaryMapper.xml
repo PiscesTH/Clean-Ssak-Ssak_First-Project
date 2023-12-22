@@ -22,7 +22,7 @@
     </insert>
 
     <select id="selDiaryAll"> <!-- 다이어리 페이징처리 -->
-        SELECT A.diary_id AS diaryId, A.title, A.contents
+        SELECT A.diary_id AS diaryId, A.title, A.contents, B.nickname
         FROM t_diary A
         JOIN t_user B
         USING (user_id)

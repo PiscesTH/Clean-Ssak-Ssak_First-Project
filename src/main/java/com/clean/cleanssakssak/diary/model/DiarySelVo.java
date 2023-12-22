@@ -17,4 +17,7 @@ public class DiarySelVo {
     private String contents;
     @Schema(title = "다이어리 사진")
     private List<String> pics;
+    @Schema(title = "유저 닉네임")
+    private String nickname;
+
 }
