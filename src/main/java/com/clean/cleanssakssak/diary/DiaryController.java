@@ -39,7 +39,7 @@ public class DiaryController {
             @ApiResponse(responseCode = "400", description = "요청 오류"),
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
-    @PostMapping()
+    @PostMapping
     public ResVo postDiary (@RequestBody DiaryInsDto dto) {
         return service.postDiary(dto);
     }
