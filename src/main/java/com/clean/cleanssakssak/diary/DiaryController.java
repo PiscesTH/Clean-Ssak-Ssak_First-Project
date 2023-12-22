@@ -95,7 +95,7 @@ public class DiaryController {
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @DeleteMapping
-    public ResVo delDiary (@RequestBody DiaryDelDto dto) {
+    public ResVo delDiary (DiaryDelDto dto) {
         return service.delDiary(dto);
     }
 }
