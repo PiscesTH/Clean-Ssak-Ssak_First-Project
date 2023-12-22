@@ -52,8 +52,8 @@ public class UserController {
     @Operation(summary = "로그인 인증", description = """
             아이디/ 비밀번호를 활용한 인증처리<br>
             1: 성공<br>
-            2: 아이디 다름<br> 
-            3: 비밀번호 다름<br> 
+            2: 아이디 다름<br>
+            3: 비밀번호 다름<br>
             -4 : 아이디 또는 비밀번호에 null이 들어옴
             """)
     @Parameters(value = {
