@@ -1,0 +1,50 @@
+[
+  {
+    "todoId": 5,
+    "cleaning": "분리수거",
+    "doDay": "2023-12-19",
+    "isChecked": 0
+  },
+  {
+    "todoId": 4,
+    "cleaning": "빨래",
+    "doDay": "2023-12-19",
+    "isChecked": 0
+  },
+  {
+    "todoId": 58,
+    "cleaning": "책상 정리",
+    "doDay": "2024-02-02",
+    "isChecked": 0
+  },
+  {
+    "todoId": 34,
+    "cleaning": "옷 정리",
+    "doDay": "2024-02-19",
+    "isChecked": 0
+  },
+  {
+    "todoId": 50,
+    "cleaning": "빨래",
+    "doDay": "2024-04-11",
+    "isChecked": 0
+  },
+  {
+    "todoId": 66,
+    "cleaning": "빨래",
+    "doDay": "2024-06-10",
+    "isChecked": 0
+  },
+  {
+    "todoId": 48,
+    "cleaning": "화장실 청소",
+    "doDay": "2024-08-21",
+    "isChecked": 0
+  },
+  {
+    "todoId": 52,
+    "cleaning": "옷 정리",
+    "doDay": "2024-08-23",
+    "isChecked": 0
+  }
+]
