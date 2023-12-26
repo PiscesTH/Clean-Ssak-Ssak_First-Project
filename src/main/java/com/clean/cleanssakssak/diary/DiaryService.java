@@ -117,9 +117,6 @@ public class DiaryService {
     public DiarySelOneVo getDiaryForEdit(int diaryId) {
         try {
             DiarySelOneVo resultVo = mapper.selDiaryForEdit(diaryId);
-            if (diaryId != resultVo.getDiaryId()) {
-                return null;
-            }
             resultVo.setPics(mapper.selDiaryPicAll(diaryId));
             return resultVo;
         } catch (Exception e) {
