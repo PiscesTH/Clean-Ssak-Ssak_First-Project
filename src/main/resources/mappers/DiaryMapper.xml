@@ -32,6 +32,12 @@
         LIMIT #{startIdx}, #{rowCount}
     </select>
 
+    <select id="selDiaryForEdit">
+        SELECT diary_id AS diaryId, title, contents
+        FROM t_diary
+        WHERE diary_id = #{diaryId}
+    </select>
+
     <select id="selDiaryPicAll">
         SELECT pic
         FROM t_diary_pic

@@ -112,4 +112,10 @@ public class DiaryService {
         }
         return new ResVo(delDiaryResult); // 0,1 표시
     }
+    // 수정을 위한 다이어리 하나 조회
+    public DiarySelOneVo getDiaryForEdit(int diaryId){
+        DiarySelOneVo resultVo = mapper.selDiaryForEdit(diaryId);
+        resultVo.setPics(mapper.selDiaryPicAll(diaryId));
+        return resultVo;
+    }
 }

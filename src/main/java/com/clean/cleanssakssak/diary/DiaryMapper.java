@@ -20,6 +20,7 @@ public interface DiaryMapper {
 
     List<DiarySelVo> selDiaryAll(DiarySelDto dto); // 다이어리 전체 조회
     List<String> selDiaryPicAll (int diaryId); //다이어리 전체 사진 조회
+    DiarySelOneVo selDiaryForEdit(int diaryId);
 
     int delDiaryPicForUnregister(int loginedUserId);// 유저 탈퇴 시 해당 유저의 사진 전체 삭제
     int delDiaryForUnregister(int loginedUserId);// 유저 탈퇴 시 해당 유저의 다이어리 전체 삭제

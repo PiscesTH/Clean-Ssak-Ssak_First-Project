@@ -60,6 +60,12 @@ public class DiaryController {
         return service.getDiary(dto);
     }
 
+    //------------------------------- 다이어리 하나 조회 -------------------------------
+    @GetMapping("/edit")
+    public DiarySelOneVo getDiaryForEdit(@RequestParam("diary_id") int diaryId){
+        return service.getDiaryForEdit(diaryId);
+    }
+
     //------------------------------- 다이어리 수정 -------------------------------
     @Operation(summary = "다이어리 수정",description = """
     수정 완료 : 1<br>
@@ -98,5 +104,6 @@ public class DiaryController {
     public ResVo delDiary (DiaryDelDto dto) {
         return service.delDiary(dto);
     }
+
 }
 
