@@ -61,6 +61,7 @@ public class DiaryController {
     }
 
     //--------------------------- 다이어리 수정을 위한 다이어리 정보 조회 ---------------------------
+    @Operation(summary = "다이어리 수정을 위한 다이어리 조회")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "통신 성공"),
             @ApiResponse(responseCode = "400", description = "요청 오류"),
