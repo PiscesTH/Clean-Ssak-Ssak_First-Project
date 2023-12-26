@@ -25,11 +25,11 @@
     </select>
 
     <select id="selTodoOne">
-        select todo_id as todoid, cleaning,
+        SELECT todo_id as todoid, cleaning,
         do_day as doday
-        from t_todo
-        where user_id = #{loginedUserId}
-        and todo_id = #{todoId}
+        FROM t_todo
+        WHERE user_id = #{loginedUserId}
+        AND todo_id = #{todoId}
     </select>
 
     <update id="updTodo">
