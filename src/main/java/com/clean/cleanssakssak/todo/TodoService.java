@@ -70,6 +70,16 @@ public class TodoService {
         }
     }
 
+    //todo 내용 수정 시 불러오기
+
+    public TodoSelOneVo getTodoForEdit(TodoSelOneDto dto){
+        try {
+            return mapper.selTodoOne(dto);
+        } catch (Exception e){
+            return null;
+        }
+    }
+
     // todo 삭제
     public ResVo delTodo(TodoDelDto dto) {
         try {

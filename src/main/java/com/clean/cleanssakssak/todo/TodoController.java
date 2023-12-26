@@ -73,6 +73,24 @@ public class TodoController {
         return service.patchTodo(dto);
     }
 
+    //-----------------------------------todo 수정 시 불러오기------------------------------------
+
+    @Operation(summary = "todo 일정 수정 시 불러오기" ,description = "기존 내용 불러오기")
+    @Parameters(value = {
+            @Parameter(name = "todoId", description = "해당 todo의 PK"),
+            @Parameter(name = "cleaning", description = "청소 목표 기존 내용"),
+            @Parameter(name = "doDay", description = "청소 할 기존 날짜"),
+    })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "통신 성공"),
+            @ApiResponse(responseCode = "400", description = "요청 오류"),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
+    @GetMapping("/edit")
+    public TodoSelOneVo getTodoForEdit(TodoSelOneDto dto){
+        return service.getTodoForEdit(dto);
+    }
+
     //---------------------------------------todo 삭제-------------------------------------------
     @Operation(summary = "todo 일정 삭제", description = "일정을 삭제<br>0: 수정 실패, <br>1: 수정 성공")
     @Parameters(value = {
