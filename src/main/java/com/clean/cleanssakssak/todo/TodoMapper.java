@@ -15,7 +15,7 @@ public interface TodoMapper {
 
     int updTodo(TodoUpdDto dto);// todo 내용 수정
 
-    TodoSelOneVo selTodoOne(TodoSelOneDto dto);// todo 내용 수정 시 불러올 원래 리스트
+    TodoSelOneVo selTodoOne(int todoId);// todo 내용 수정 시 불러올 원래 리스트
 
     int delTodo(TodoDelDto dto);// todo 삭제
 

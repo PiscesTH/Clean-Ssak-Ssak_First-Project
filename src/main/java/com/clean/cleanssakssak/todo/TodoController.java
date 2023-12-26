@@ -79,7 +79,6 @@ public class TodoController {
     @Parameters(value = {
             @Parameter(name = "todoId", description = "해당 todo의 PK"),
             @Parameter(name = "cleaning", description = "청소 목표 기존 내용"),
-            @Parameter(name = "doDay", description = "청소 할 기존 날짜"),
     })
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "통신 성공"),
@@ -87,8 +86,8 @@ public class TodoController {
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @GetMapping("/edit")
-    public TodoSelOneVo getTodoForEdit(TodoSelOneDto dto){
-        return service.getTodoForEdit(dto);
+    public TodoSelOneVo getTodoForEdit(@RequestParam("todo_id") int todoId){
+        return service.getTodoForEdit(todoId);
     }
 
     //---------------------------------------todo 삭제-------------------------------------------

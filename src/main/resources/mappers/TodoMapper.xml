@@ -28,8 +28,7 @@
         SELECT todo_id as todoid, cleaning,
         do_day as doday
         FROM t_todo
-        WHERE user_id = #{loginedUserId}
-        AND todo_id = #{todoId}
+        WHERE todo_id = #{todoId}
     </select>
 
     <update id="updTodo">

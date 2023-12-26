@@ -72,9 +72,9 @@ public class TodoService {
 
     //todo 내용 수정 시 불러오기
 
-    public TodoSelOneVo getTodoForEdit(TodoSelOneDto dto){
+    public TodoSelOneVo getTodoForEdit(int todoId){
         try {
-            return mapper.selTodoOne(dto);
+            return mapper.selTodoOne(todoId);
         } catch (Exception e){
             return null;
         }
