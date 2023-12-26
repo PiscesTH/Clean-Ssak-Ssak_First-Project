@@ -60,7 +60,12 @@ public class DiaryController {
         return service.getDiary(dto);
     }
 
-    //------------------------------- 다이어리 하나 조회 -------------------------------
+    //--------------------------- 다이어리 수정을 위한 다이어리 정보 조회 ---------------------------
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "통신 성공"),
+            @ApiResponse(responseCode = "400", description = "요청 오류"),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
     @GetMapping("/edit")
     public DiarySelOneVo getDiaryForEdit(@RequestParam("diary_id") int diaryId){
         return service.getDiaryForEdit(diaryId);
