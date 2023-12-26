@@ -76,10 +76,6 @@ public class TodoController {
     //-----------------------------------todo 수정 시 불러오기------------------------------------
 
     @Operation(summary = "todo 일정 수정 시 불러오기" ,description = "기존 내용 불러오기")
-    @Parameters(value = {
-            @Parameter(name = "todoId", description = "해당 todo의 PK"),
-            @Parameter(name = "cleaning", description = "청소 목표 기존 내용"),
-    })
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "통신 성공"),
             @ApiResponse(responseCode = "400", description = "요청 오류"),
