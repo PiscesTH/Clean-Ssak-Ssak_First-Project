@@ -82,7 +82,7 @@ public class TodoController {
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @GetMapping("/edit")
-    public TodoSelOneVo getTodoForEdit(@RequestParam("todo_id") int todoId){
+    public TodoSelOneVo getTodoForEdit(@RequestParam int todoId){
         return service.getTodoForEdit(todoId);
     }
 

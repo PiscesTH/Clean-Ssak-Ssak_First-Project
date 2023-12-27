@@ -68,7 +68,7 @@ public class DiaryController {
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @GetMapping("/edit")
-    public DiarySelOneVo getDiaryForEdit(@RequestParam("diary_id") int diaryId){
+    public DiarySelOneVo getDiaryForEdit(@RequestParam int diaryId){
         return service.getDiaryForEdit(diaryId);
     }
 
@@ -93,8 +93,6 @@ public class DiaryController {
         return service.patchDiary(dto);
     }
 
-
-
     //------------------------------- 다이어리 삭제 -------------------------------
     @Operation(summary = "다이어리 삭제",description = "삭제 완료 : 1 <br>삭제 실패 : 0 ")
     @Parameters(value = {
@@ -110,6 +108,5 @@ public class DiaryController {
     public ResVo delDiary (DiaryDelDto dto) {
         return service.delDiary(dto);
     }
-
 }
 

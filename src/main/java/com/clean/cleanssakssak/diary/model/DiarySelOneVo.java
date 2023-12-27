@@ -8,8 +8,6 @@ import java.util.List;
 
 @Data
 public class DiarySelOneVo {
-    @Schema(title = "다이어리 pk")
-    private int diaryId;
     @Schema(title = "다이어리 제목")
     private String title;
     @Schema(title = "다이어리 내용")
