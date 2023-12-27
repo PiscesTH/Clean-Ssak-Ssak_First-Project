@@ -39,11 +39,11 @@ public class TodoService {
         }*/
     }
 
-    //등록한 todo 전체 조회(한 페이지에 8개씩 페이징 처리)
+    //등록한 todo 전체 조회
     public List<TodoSelAllVo> getTodoAll(TodoSelAllDto dto) {
 
-        dto.setRowCount(Const.TODO_ROW_COUNT);  //페이징 처리에 필요한 데이터 설정
-        dto.setStartIdx((dto.getPage() - 1) * Const.TODO_ROW_COUNT);  //페이징 처리에 필요한 데이터 설정
+//        dto.setRowCount(Const.TODO_ROW_COUNT);  //페이징 처리에 필요한 데이터 설정
+//        dto.setStartIdx((dto.getPage() - 1) * Const.TODO_ROW_COUNT);  //페이징 처리에 필요한 데이터 설정
         try {
             return mapper.selTodoAll(dto);
         } catch (Exception e) {
