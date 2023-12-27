@@ -21,7 +21,7 @@
         </foreach>
     </insert>
 
-    <select id="selDiaryAll"> <!-- 다이어리 페이징처리 -->
+    <select id="selDiaryAll">
         SELECT A.diary_id AS diaryId, A.title, A.contents, B.nickname
         FROM t_diary A
         JOIN t_user B
@@ -29,7 +29,6 @@
         WHERE user_id = #{loginedUserId}
         AND A.is_del = 0
         ORDER BY diary_id DESC
-        LIMIT #{startIdx}, #{rowCount}
     </select>
 
     <select id="selDiaryForEdit">

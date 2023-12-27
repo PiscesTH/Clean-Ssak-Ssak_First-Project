@@ -12,7 +12,7 @@ public class DiarySelDto {
     private int loginedUserId;
     @Schema(title = "페이지")
     private int page;
-
+/*
     @JsonIgnore
     private int startIdx;//
     @JsonIgnore
@@ -21,5 +21,7 @@ public class DiarySelDto {
     public void setPage(int page) { //페이징처리
         this.startIdx = (page - 1) * rowCount;
     }
+    */
+
 
 }
