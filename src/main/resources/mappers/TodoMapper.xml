@@ -20,7 +20,6 @@
         AND is_del = 0
         AND do_day >= CURDATE()
         ORDER BY do_day
-        LIMIT #{startIdx}, #{rowCount}
         ]]>
     </select>
 

@@ -45,7 +45,7 @@ public class DiaryService {
         return new ResVo(dto.getDiaryId());
     }
 
-    // 다이어리 전체 조회 (10개씩 페이징 처리)
+    // 다이어리 전체 조회
     public List<DiarySelVo> getDiary(DiarySelDto dto) {
         try {
             List<DiarySelVo> list = mapper.selDiaryAll(dto);
