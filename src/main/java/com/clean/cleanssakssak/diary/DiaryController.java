@@ -46,10 +46,6 @@ public class DiaryController {
 
     //------------------------------- 다이어리 전체 조회 -------------------------------
     @Operation(summary = "다이어리 조회")
-    @Parameters(value = {
-            @Parameter(name = "user_id", description = "유저")
-            ,@Parameter(name = "page", description = "페이지")
-    })
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "통신 성공"),
             @ApiResponse(responseCode = "400", description = "요청 오류"),
