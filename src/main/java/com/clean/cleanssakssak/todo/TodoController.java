@@ -39,7 +39,7 @@ public class TodoController {
     }
 
     //---------------------------------------todo 조회-------------------------------------------
-    @Operation(summary = "todo 일정 목록 불러오기", description = "8개씩 페이징 처리")
+    @Operation(summary = "todo 일정 목록 불러오기")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "통신 성공"),
             @ApiResponse(responseCode = "400", description = "요청 오류"),
