@@ -21,6 +21,7 @@
         AND do_day >= CURDATE()
         ORDER BY do_day
         ]]>
+        <!-- LIMIT #{startIdx}, #{rowCount} -->
     </select>
 
     <select id="selTodoOne">

@@ -29,6 +29,7 @@
         WHERE user_id = #{loginedUserId}
         AND A.is_del = 0
         ORDER BY diary_id DESC
+        <!-- LIMIT #{startIdx}, #{rowCount} -->
     </select>
 
     <select id="selDiaryForEdit">
